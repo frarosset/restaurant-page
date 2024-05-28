@@ -1,0 +1,244 @@
+@font-face {
+    font-family: 'Satisfy';
+    src: url('./font/Satisfy/Satisfy-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "JosefinSans";
+    src: url("font/Josefin_Sans/JosefinSans-VariableFont_wght.ttf") format("truetype");
+    font-weight: 125 950;
+    font-style: normal;
+}
+@font-face {
+    font-family: "JosefinSans";
+    src: url("font/Josefin_Sans/JosefinSans-Italic-VariableFont_wght.ttf") format("truetype");
+    font-weight: 125 950;
+    font-style: italic;
+}
+
+:root {
+    /* Colors (palette)*/
+    --col-accent: #f5cb5c;
+    --col-pure-white: #ffffff;
+    --col-white: #e8eddf;
+    --col-light-grey: #cfdbd5;
+    --col-dark-grey: #333533;
+    --col-black: #242423;
+    --col-pure-black: #000000;
+    
+    /* Colors (background)*/
+    --bg-col:                   var(--col-white);
+    
+    /* Colors (text/icons)*/
+    --col-txt:                  var(--col-black);
+    --col-txt-alt:              var(--col-pure-white);
+    --col-highlight:            var(--col-accent);
+
+    /* Font family */
+    --main-font: 'JosefinSans', sans-serif;
+    --main-font-alt: 'Satisfy', serif;
+    --title-font: 'Satisfy', serif;
+
+    /* Font sizes */
+    --txt-fontsize:     18px;
+    --txt-lineheight:   1.2;
+    --title-font-size:  2.5rem;
+    --home-h2-fontsize:  4vw;
+    --home-txt-fontsize:  6vw;
+
+    --logo-size: calc(2*var(--title-font-size));
+
+    /* Maximum width (including dashboard margin) */
+    --max-width: min(1440px, 100%);
+
+    /*Margins, gaps and paddings (+widths)*/
+    --home-padding: calc(0.5*var(--home-txt-fontsize)) calc(1*var(--home-txt-fontsize));
+    --header-padding: 1rem;
+    --header-gap: 1rem;
+    --nav-gap: 1em;
+    --nav-btn-padding: 1em;
+
+    /* Radius */
+    --radius:  4rem;
+
+    /* Shadows */
+    --text-shadow: 3px 3px 3px var(--col-dark-grey);
+
+    /* Animations on hover / active / ...*/
+    /* --transition-time: 0.8s; */
+
+}
+
+html {
+    background-color: var(--bg-col);
+    color: var(--col-txt);
+    font-family: var(--main-font), sans-serif;
+    font-weight: 400;
+    font-size: var(--txt-fontsize);
+    line-height: var(--txt-lineheight);
+}
+
+*,
+*:before,
+*:after{
+    font-family: inherit;
+    font-size: inherit; /* 100% */
+    line-height: inherit;
+    color: inherit;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    vertical-align: baseline;
+}
+
+
+body {
+    margin: 0 auto;
+    
+    /* if you want to allow scroll: */
+    min-height: 100vh;
+    height: 100%;
+    
+    width: 100%;
+    /* or max-width -- this avoids horizontal scroll bars */
+    
+    touch-action: manipulation; /* disable double tap to zoom on some browsers*/
+}
+
+.screen-height {
+    height: 100vh;
+    height: 100dvh; /* if supported */
+
+    background-image: url('./img/home-bg.jpg');
+    background-repeat:no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/*****************************************************/
+
+/* || Generic */
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body>*{
+    width: 100%;
+}
+
+.header,
+.main{
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+p {
+   text-wrap: balance;
+}
+
+ul{
+    list-style: none;    
+}
+
+a,
+a:hover,
+a:active,
+a:visited{
+    text-decoration: none;
+}
+
+/* HEADER */
+
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--header-padding);
+    gap: var(--header-gap);
+}
+
+header .logo-and-name{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header .logo-and-name h1{
+    font-family: var(--title-font);
+    font-size: var(--title-font-size);
+}
+header .logo-and-name img{
+    width: var(--logo-size);
+}
+header nav{
+    display: flex;
+    gap: var(--nav-gap);
+}
+header nav button{
+    text-transform: uppercase;
+    background-color: transparent;
+    border: none;
+    font-weight: 800;
+    border-radius: 50% 50% 78% 22% / 30% 49% 51% 70%;
+    padding: var(--nav-btn-padding);
+}
+
+/* tablet or larger, or landscape (vs portrait)*/
+@media only screen and (min-width: 768px), (orientation: landscape){
+
+    header{
+        flex-direction: row;
+    }
+    
+    header .logo-and-name{
+        flex-direction: row;
+    }
+}
+
+/* when hover is supported */
+@media not all and (hover: none){
+    header nav button:hover{
+        background-color: var(--col-highlight);
+    } 
+
+}
+
+/* CONTENT */
+#content{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.home-txt{
+    color: var(--col-txt-alt);
+    font-size: var(--home-txt-fontsize);
+    backdrop-filter: blur(2px) brightness(70%);
+    text-shadow: var(--text-shadow);
+    padding: var(--home-padding);
+    width: 100%;
+    text-align: center;
+}
+
+.home-txt h2{
+    font-size: var(--home-h2-fontsize);
+    color: var(--col-highlight);
+}
+.highlight{
+    font-family: var(--main-font-alt);
+}
+
+@media only screen and (min-width: 768px), (orientation: landscape){
+    .home-txt{
+        text-align: left;
+    }
+}

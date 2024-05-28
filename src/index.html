@@ -6,14 +6,27 @@
     <title>Restaurant page</title>
 </head>
 <body>
-    <header>
-        <h1>Restaurant logo</h1>
-        <nav>
-            <button>About</button>
-            <button>Menu</button>
-            <button>Contact</button>
-        </nav>
-    </header>
-    <div id="content"></div>
+    <div class="screen-height">
+        <header>
+            <div class="logo-and-name">
+                <img src="<%=require('./img/logo-black.svg')%>" alt="restaurant-logo">
+                <h1>Solo pasta</h1>
+            </div>
+            <nav>
+                <button>About</button>
+                <button>Menu</button>
+                <button>Contact</button>
+            </nav>
+        </header>
+        <main id="content">
+            <div class="home-txt">
+                <h2>One dish, countless tastes!</h2>
+                <p><span class="highlight">Enjoy</span> our delicious pasta,</p>
+                <p>crafted to <span class="highlight">perfection</span>.</p>
+            </div>
+        </main>
+    </div>
+    <footer>
+    </footer>
 </body>
 </html>
