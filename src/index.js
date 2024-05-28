@@ -1,3 +1,4 @@
 import './style.css';
+import initWebpage from './initWebpage.js';
 
-console.log('TEST ok');
+initWebpage();
