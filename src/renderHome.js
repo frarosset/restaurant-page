@@ -23,4 +23,7 @@ function createHome(contentDiv){
     homeTxtDiv.appendChild(p2);
 
     contentDiv.appendChild(homeTxtDiv);
+    contentDiv.classList.toggle('tab',false);
 }
+
+// placeholder content generated with assistance from Microsoft Copilot

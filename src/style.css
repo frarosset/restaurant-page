@@ -29,11 +29,16 @@
     
     /* Colors (background)*/
     --bg-col:                   var(--col-white);
+    --bg-col-txt:               var(--col-accent);
+    --bg-col-txt-alt:           var(--col-dark-grey);
     
     /* Colors (text/icons)*/
     --col-txt:                  var(--col-black);
-    --col-txt-alt:              var(--col-pure-white);
-    --col-highlight:            var(--col-accent);
+    --col-txt-alt:              var(--col-white);
+    --col-h2-home:              var(--col-accent);
+    --col-h2-tab:               var(--col-black);
+    --col-h3:                   var(--col-dark-grey);
+    --col-h3-alt:               var(--col-accent);
 
     /* Font family */
     --main-font: 'JosefinSans', sans-serif;
@@ -46,6 +51,9 @@
     --title-font-size:  2.5rem;
     --home-h2-fontsize:  4vw;
     --home-txt-fontsize:  6vw;
+    --tab-h2-fontsize: 4rem;
+    --tab-h3-fontsize: 2rem;
+    --tab-p-fontsize: 1.5rem;
 
     --logo-size: calc(2*var(--title-font-size));
 
@@ -56,18 +64,23 @@
     --home-padding: calc(0.5*var(--home-txt-fontsize)) calc(1*var(--home-txt-fontsize));
     --header-padding: 1rem;
     --header-gap: 1rem;
+    --tab-header-padding: 3rem;
+    --tab-section-padding: 2rem;
+    --tab-section-gap: 2rem;
+    --tab-section-empty-space: 50vh;
     --nav-gap: 1em;
     --nav-btn-padding: 1em;
+    --nav-btn-sel-scale: 1.2;
 
     /* Radius */
     --radius:  4rem;
+    --sel-radius: 50% 50% 78% 22% / 30% 49% 51% 70%;
 
     /* Shadows */
     --text-shadow: 3px 3px 3px var(--col-dark-grey);
 
     /* Animations on hover / active / ...*/
     /* --transition-time: 0.8s; */
-
 }
 
 html {
@@ -107,8 +120,8 @@ body {
 }
 
 .screen-height {
-    height: 100vh;
-    height: 100dvh; /* if supported */
+    min-height: 100vh;
+    min-height: 100dvh; /* if supported */
 
     background-image: url('./img/home-bg.jpg');
     background-repeat:no-repeat;
@@ -131,7 +144,7 @@ body>*{
     width: 100%;
 }
 
-.header,
+.screen-height>header,
 .main{
     width: 100%;
     max-width: var(--max-width);
@@ -155,7 +168,7 @@ a:visited{
 
 /* HEADER */
 
-header{
+.screen-height>header{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -164,48 +177,54 @@ header{
     gap: var(--header-gap);
 }
 
-header .logo-and-name{
+.screen-height>header .logo-and-name{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-header .logo-and-name h1{
+.screen-height>header .logo-and-name h1{
     font-family: var(--title-font);
     font-size: var(--title-font-size);
 }
-header .logo-and-name img{
+.screen-height>header .logo-and-name img{
     width: var(--logo-size);
 }
-header nav{
+.screen-height>header nav{
     display: flex;
     gap: var(--nav-gap);
 }
-header nav button{
+.screen-height>header nav button{
     text-transform: uppercase;
     background-color: transparent;
     border: none;
     font-weight: 800;
-    border-radius: 50% 50% 78% 22% / 30% 49% 51% 70%;
+    border-radius: var(--sel-radius);
     padding: var(--nav-btn-padding);
+}
+
+.screen-height:has(h2.about)>header nav button.about-btn{
+    background-color: var(--bg-col-txt);
+    transform: scale(--nav-btn-sel-scale);
+    pointer-events: none;
 }
 
 /* tablet or larger, or landscape (vs portrait)*/
 @media only screen and (min-width: 768px), (orientation: landscape){
-
-    header{
+    .screen-height>header{
         flex-direction: row;
     }
     
-    header .logo-and-name{
+    .screen-height>header .logo-and-name{
         flex-direction: row;
     }
 }
 
 /* when hover is supported */
 @media not all and (hover: none){
-    header nav button:hover{
-        background-color: var(--col-highlight);
+    .screen-height>header nav button:hover{
+        background-color: var(--bg-col-txt-alt);
+        color: var(--col-txt-alt);
     } 
 
 }
@@ -214,11 +233,13 @@ header nav button{
 #content{
     height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     flex: 1;
 }
 
+/* HOME PAGE */
 .home-txt{
     color: var(--col-txt-alt);
     font-size: var(--home-txt-fontsize);
@@ -231,7 +252,7 @@ header nav button{
 
 .home-txt h2{
     font-size: var(--home-h2-fontsize);
-    color: var(--col-highlight);
+    color: var(--col-h2-home);
 }
 .highlight{
     font-family: var(--main-font-alt);
@@ -242,3 +263,59 @@ header nav button{
         text-align: left;
     }
 }
+
+/* TAB PAGES */
+#content.tab header{
+    padding: var(--tab-header-padding);
+}
+#content.tab h2{
+    font-size: var(--tab-h2-fontsize);
+    border-radius: var(--sel-radius);
+    color: var(--col-h2-tab);
+    background-color: var(--bg-col-txt);
+}
+
+#content.tab section{
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    flex: 1;
+}
+#content.tab section h3{
+    padding: var(--tab-section-padding);
+    padding-bottom: var(--tab-section-gap);
+    font-family: var(--main-font-alt);
+    font-size: var(--tab-h3-fontsize);
+} 
+#content.tab section p{
+    padding: var(--tab-section-padding);
+    padding-top: 0;
+    font-size: var(--tab-p-fontsize);
+}
+#content.tab section:nth-child(2n) h3,
+#content.tab section:nth-child(2n) p{
+    background-color: var(--bg-col-txt-alt);
+}
+#content.tab section:nth-child(2n) h3{
+    color: var(--col-h3-alt);
+} 
+#content.tab section:nth-child(2n) p{
+    color: var(--col-txt-alt);
+}
+#content.tab section:nth-child(2n+1) h3,
+#content.tab section:nth-child(2n+1) p{
+    background-color: var(--bg-col-txt);
+}
+#content.tab section:nth-child(2n+1) h3{
+    color: var(--col-h3);
+} 
+#content.tab section:nth-child(2n+1) p{
+    color: var(--col-txt);
+}
+
+#content.tab section .space{
+    height: var(--tab-section-empty-space);
+}
+
