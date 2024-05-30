@@ -203,6 +203,9 @@ a:visited{
     padding: var(--nav-btn-padding);
 }
 
+.screen-height:has(.home-txt)>header .logo-and-name{
+    pointer-events: none;
+}
 .screen-height:has(h2.about)>header nav button.about-btn{
     background-color: var(--bg-col-txt);
     transform: scale(--nav-btn-sel-scale);
@@ -222,9 +225,15 @@ a:visited{
 
 /* when hover is supported */
 @media not all and (hover: none){
+    .logo-and-name:hover{
+        text-shadow: 2px 2px 2px var(--col-accent);
+        cursor: pointer;
+    }
+
     .screen-height>header nav button:hover{
         background-color: var(--bg-col-txt-alt);
         color: var(--col-txt-alt);
+        cursor: pointer;
     } 
 
 }
