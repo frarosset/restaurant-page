@@ -36,9 +36,12 @@
     --col-txt:                  var(--col-black);
     --col-txt-alt:              var(--col-white);
     --col-h2-home:              var(--col-accent);
-    --col-h2-tab:               var(--col-black);
-    --col-h3:                   var(--col-dark-grey);
-    --col-h3-alt:               var(--col-accent);
+    --col-p-home:               var(--col-pure-white);
+    --col-h2-tab:               var(--col-pure-white);
+    --col-h3:                   var(--col-black);
+    --col-h3-alt:               var(--col-light-grey);
+    --col-h4:                   var(--col-dark-grey);
+    --col-h4-alt:               var(--col-accent);
 
     /* Font family */
     --main-font: 'JosefinSans', sans-serif;
@@ -53,7 +56,10 @@
     --home-txt-fontsize:  6vw;
     --tab-h2-fontsize: 4rem;
     --tab-h3-fontsize: 2rem;
+    --tab-h3-menu-fontsize: 3rem;
+    --tab-h4-fontsize: 2rem;
     --tab-p-fontsize: 1.5rem;
+    --tab-price-fontsize: 1.8rem;
 
     --logo-size: calc(2*var(--title-font-size));
 
@@ -67,9 +73,12 @@
     --tab-header-padding: 3rem;
     --tab-section-padding: 2rem;
     --tab-section-gap: 2rem;
+    --tab-subsection-gap: 0.5rem;
     --tab-section-empty-space: 50vh;
+    --tab-price-padding: 0.3em 0.5em;
+    --tab-h4-price-gap: 0.5em;  
     --nav-gap: 1em;
-    --nav-btn-padding: 1em;
+    --nav-btn-padding: 0.5em 1em;
     --nav-btn-sel-scale: 1.2;
 
     /* Radius */
@@ -77,7 +86,8 @@
     --sel-radius: 50% 50% 78% 22% / 30% 49% 51% 70%;
 
     /* Shadows */
-    --text-shadow: 3px 3px 3px var(--col-dark-grey);
+    --text-shadow: 3px 3px 3px var(--col-black);
+    --text-shadow-larger: 5px 0px 10px var(--col-black), 5px 5px 5px var(--col-dark-grey);
 
     /* Animations on hover / active / ...*/
     /* --transition-time: 0.8s; */
@@ -127,6 +137,7 @@ body {
     background-repeat:no-repeat;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     display: flex;
     flex-direction: column;
 }
@@ -151,7 +162,7 @@ body>*{
     margin: 0 auto;
 }
 
-p {
+h1,h2,h3,h4,p {
    text-wrap: balance;
 }
 
@@ -206,9 +217,10 @@ a:visited{
 .screen-height:has(.home-txt)>header .logo-and-name{
     pointer-events: none;
 }
-.screen-height:has(h2.about)>header nav button.about-btn{
+.screen-height:has(h2.about)>header nav button.about-btn,
+.screen-height:has(h2.menu)>header nav button.menu-btn{
     background-color: var(--bg-col-txt);
-    transform: scale(--nav-btn-sel-scale);
+    transform: scale(var(--nav-btn-sel-scale));
     pointer-events: none;
 }
 
@@ -250,7 +262,7 @@ a:visited{
 
 /* HOME PAGE */
 .home-txt{
-    color: var(--col-txt-alt);
+    color: var(--col-p-home);
     font-size: var(--home-txt-fontsize);
     backdrop-filter: blur(2px) brightness(70%);
     text-shadow: var(--text-shadow);
@@ -279,9 +291,9 @@ a:visited{
 }
 #content.tab h2{
     font-size: var(--tab-h2-fontsize);
-    border-radius: var(--sel-radius);
+    font-variant: small-caps;
     color: var(--col-h2-tab);
-    background-color: var(--bg-col-txt);
+    text-shadow: var(--text-shadow-larger);
 }
 
 #content.tab section{
@@ -297,34 +309,121 @@ a:visited{
     padding-bottom: var(--tab-section-gap);
     font-family: var(--main-font-alt);
     font-size: var(--tab-h3-fontsize);
+}
+#content.tab section.has-subsections h3{
+    font-size: var(--tab-h3-menu-fontsize);
+    font-variant: small-caps;
+    font-family: var(--main-font);
+    text-align: center;
+}  
+#content.tab section h4{
+    font-family: var(--main-font-alt);
+    font-size: var(--tab-h4-fontsize);
 } 
 #content.tab section p{
     padding: var(--tab-section-padding);
     padding-top: 0;
     font-size: var(--tab-p-fontsize);
 }
-#content.tab section:nth-child(2n) h3,
-#content.tab section:nth-child(2n) p{
-    background-color: var(--bg-col-txt-alt);
+#content.tab section .h4-and-price{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--tab-section-padding);
+    gap: var(--tab-h4-price-gap);
+    padding-bottom: var(--tab-subsection-gap);
 }
-#content.tab section:nth-child(2n) h3{
-    color: var(--col-h3-alt);
+#content.tab section span.price{
+    border-radius: var(--sel-radius);
+    padding: var(--tab-price-padding);
+    font-size: var(--tab-price-fontsize);  
+}
+
+#content.tab section:nth-child(2n){
+    --section-bg-col-txt: var(--bg-col-txt-alt);
+    --section-col-h3: var(--col-h4-alt);
+    --section-col-h4: var(--col-h4-alt);
+    --section-col-txt: var(--col-txt-alt);
+    --section-bg-col-alt: var(--bg-col-txt);
+    --section-col-txt-alt: var(--col-txt);
+}
+#content.tab section:nth-child(2n+1){
+    --section-bg-col-txt: var(--bg-col-txt);
+    --section-col-h3: var(--col-h4);
+    --section-col-h4: var(--col-h4);
+    --section-col-txt: var(--col-txt);
+    --section-bg-col-alt: var(--bg-col-txt-alt);
+    --section-col-txt-alt: var(--col-txt-alt);
+}
+#content.tab section.has-subsections:nth-child(2n){
+    --section-col-h3: var(--col-h3-alt);
+}
+#content.tab section.has-subsections:nth-child(2n+1){
+    --section-col-h3: var(--col-h3);
+}
+
+#content.tab section .section-solid-bg{
+    background-color: var(--section-bg-col-txt);
+}
+#content.tab section h3{
+    color: var(--section-col-h3);
+}
+#content.tab section h4{
+    color: var(--section-col-h4);
 } 
-#content.tab section:nth-child(2n) p{
-    color: var(--col-txt-alt);
+#content.tab section p{
+    color: var(--section-col-txt);
 }
-#content.tab section:nth-child(2n+1) h3,
-#content.tab section:nth-child(2n+1) p{
-    background-color: var(--bg-col-txt);
-}
-#content.tab section:nth-child(2n+1) h3{
-    color: var(--col-h3);
-} 
-#content.tab section:nth-child(2n+1) p{
-    color: var(--col-txt);
+#content.tab section span.price{
+    background-color: var(--section-bg-col-alt);
+    color: var(--section-col-txt-alt);
 }
 
 #content.tab section .space{
-    height: var(--tab-section-empty-space);
+    min-height: var(--tab-section-empty-space);
+}
+
+#content.tab:has(.menu) section .section-solid-bg{
+    display: grid;
+    grid-template-rows: min-content min-content  min-content;
+    grid-template-areas:
+        "img"
+        "h4"
+        "dishes";
+    grid-template-columns: 1fr;
+}
+
+@media only screen and (min-width: 768px), (orientation: landscape){
+    #content.tab:has(.menu) section .section-solid-bg{
+        grid-template-rows: min-content min-content;
+    }
+    #content.tab:has(.menu) section:nth-child(2n) .section-solid-bg{
+        grid-template-areas:
+            "h4 img"
+            "dishes img";
+        grid-template-columns: 1fr 1.2fr;
+    }
+    #content.tab:has(.menu) section:nth-child(2n+1) .section-solid-bg{
+        grid-template-areas:
+            "img h4"
+            "img dishes";
+        grid-template-columns: 1.2fr 1fr;
+    }
+}
+#content.tab:has(.menu) section .section-solid-bg h4{
+    grid-area: h4;
+}
+#content.tab:has(.menu) section .section-solid-bg .img{
+    grid-area: img;
+}
+#content.tab:has(.menu) section .section-solid-bg .dishes{
+    grid-area: dishes;
+}
+
+#content.tab section .img{
+    min-height: var(--tab-section-empty-space);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 

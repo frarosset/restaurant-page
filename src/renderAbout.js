@@ -1,6 +1,7 @@
 import {removeDescendants} from './domUtils.js';
 
-import aboutSectionsData from './data/about-text.csv';
+// in the following csv file, each line refers to a section in the about tab
+import aboutTabSectionsInfo from './data/about-sections.csv';
 
 import aboutImg_0 from './img/about-0.jpg';
 import aboutImg_1 from './img/about-1.jpg';
@@ -17,7 +18,7 @@ export default function renderAbout(contentDiv){
 
 function createAbout(contentDiv){
     const titleH2 = document.createElement('h2');
-    titleH2.textContent = 'About';
+    titleH2.textContent = 'about';
     // the following class will be used to style the about nav button when showing the about page
     titleH2.classList.add('about');
 
@@ -25,7 +26,7 @@ function createAbout(contentDiv){
     header.appendChild(titleH2);
 
     const sections = [];
-    aboutSectionsData.forEach(sectionInfo => {
+    aboutTabSectionsInfo.forEach(sectionInfo => {
         const h3 = document.createElement('h3');
         h3.textContent = sectionInfo[1];
 
@@ -36,8 +37,13 @@ function createAbout(contentDiv){
         spaceDiv.classList.add('space');
 
         const section = document.createElement('section');
-        section.appendChild(h3);
-        section.appendChild(p);
+        const sectionSolidBg = document.createElement('div');
+        sectionSolidBg.classList.add('section-solid-bg');
+
+        sectionSolidBg.appendChild(h3);
+        sectionSolidBg.appendChild(p);
+
+        section.appendChild(sectionSolidBg);
         section.appendChild(spaceDiv);
         section.style.backgroundImage = `url(${aboutImg[sectionInfo[0]]})`;
         sections.push(section);

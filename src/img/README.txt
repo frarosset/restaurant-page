@@ -16,6 +16,22 @@ About page images:
 - Photo by Yoav Azizi from Unsplash
   Link: https://unsplash.com/it/foto/scaglie-marroni-e-bianche-su-tessuto-blu-e-bianco-aiikUGDouCY
   
-- Photo by Heather Ford from Unsplash
-  Link: https://unsplash.com/it/foto/quattro-pomodori-rossi-accanto-alla-pasta-e-alla-ciotola-f1Z9w1efx3w
+- Photo by Chopchopnom from Pixabay
+  Link: https://pixabay.com/photos/pasta-cheese-egg-flour-794464/
 
+Menu page images:
+- Photo by Christine Siracusa from Unsplash
+  Link: https://unsplash.com/it/foto/pasta-su-piatto-bianco-vicino-al-vetro-Cs5xVwB50Ps
+
+- Photo by Ji-yeon Yun from Pixabay
+  Link: https://pixabay.com/photos/pasta-oil-pasta-spaghetti-984960/
+  
+- Photo by Megan Bucknall from Unsplash
+  Link: https://unsplash.com/it/foto/forchetta-in-acciaio-inox-su-piastra-in-ceramica-bianca-edyYnPwpcXQ
+  
+- Photo by Azimi from Unsplash
+  Link: https://unsplash.com/it/foto/un-piatto-bianco-sormontato-da-una-fetta-di-lasagne-accanto-a-una-ciotola-di-GWWOvuVB1NI
+
+- Photo by KamranAydinov from FreePik
+  Link: https://www.freepik.com/free-photo/top-view-delicious-dumplings-with-vegetables-different-seasonings-dark-green-surface-meal-food-ingredient-product-dough-meat_13190644.htm#fromView=search&page=2&position=36&uuid=a4aec89e-9931-4a57-8720-2e72cd841e65
+  
