@@ -1,4 +1,4 @@
-import './style.css';
-import initWebpage from './initWebpage.js';
+import "./style.css";
+import initWebpage from "./initWebpage.js";
 
 initWebpage();
