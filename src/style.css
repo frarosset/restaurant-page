@@ -39,7 +39,7 @@
     --col-p-home:               var(--col-pure-white);
     --col-h2-tab:               var(--col-pure-white);
     --col-h3:                   var(--col-black);
-    --col-h3-alt:               var(--col-light-grey);
+    --col-h3-alt:               var(--col-white);
     --col-h4:                   var(--col-dark-grey);
     --col-h4-alt:               var(--col-accent);
 
@@ -75,6 +75,7 @@
     --tab-section-gap: 2rem;
     --tab-subsection-gap: 0.5rem;
     --tab-section-empty-space: 50vh;
+    --tab-section-empty-divider: 1.5rem;
     --tab-price-padding: 0.3em 0.5em;
     --tab-h4-price-gap: 0.5em;  
     --nav-gap: 1em;
@@ -84,6 +85,7 @@
     /* Radius */
     --radius:  4rem;
     --sel-radius: 50% 50% 78% 22% / 30% 49% 51% 70%;
+    --map-radius: 1rem;
 
     /* Shadows */
     --text-shadow: 3px 3px 3px var(--col-black);
@@ -382,13 +384,24 @@ a:visited{
 #content.tab section .space{
     min-height: var(--tab-section-empty-space);
 }
+#content.tab section .divider{
+    height: var(--tab-section-empty-divider);
+}
 
+#content.tab section .img{
+    min-height: var(--tab-section-empty-space);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/* rules specific to menu tab */
 #content.tab:has(.menu) section .section-solid-bg{
     display: grid;
     grid-template-rows: min-content min-content  min-content;
     grid-template-areas:
         "img"
-        "h4"
+        "h3"
         "dishes";
     grid-template-columns: 1fr;
 }
@@ -399,19 +412,19 @@ a:visited{
     }
     #content.tab:has(.menu) section:nth-child(2n) .section-solid-bg{
         grid-template-areas:
-            "h4 img"
+            "h3 img"
             "dishes img";
         grid-template-columns: 1fr 1.2fr;
     }
     #content.tab:has(.menu) section:nth-child(2n+1) .section-solid-bg{
         grid-template-areas:
-            "img h4"
+            "img h3"
             "img dishes";
         grid-template-columns: 1.2fr 1fr;
     }
 }
-#content.tab:has(.menu) section .section-solid-bg h4{
-    grid-area: h4;
+#content.tab:has(.menu) section .section-solid-bg h3{
+    grid-area: h3;
 }
 #content.tab:has(.menu) section .section-solid-bg .img{
     grid-area: img;
@@ -420,10 +433,64 @@ a:visited{
     grid-area: dishes;
 }
 
-#content.tab section .img{
-    min-height: var(--tab-section-empty-space);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+/* rules specific to contact tab */
+#content.tab:has(.contact) div.data.days-and-hours {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: max-content 2fr;
 }
 
+#content.tab:has(.contact) section .section-solid-bg.with-side-image{
+    display: grid;
+    grid-template-rows: var(--tab-section-empty-space) min-content  min-content;
+    grid-template-areas:
+        "img"
+        "h3"
+        "data";
+    grid-template-columns: 1fr;
+}
+
+@media only screen and (min-width: 768px), (orientation: landscape){
+    #content.tab:has(.contact) section .section-solid-bg.with-side-image{
+        grid-template-rows: min-content min-content;
+    }
+    #content.tab:has(.contact) section:nth-child(2n) .section-solid-bg.with-side-image{
+        grid-template-areas:
+            "h3 img"
+            "data img";
+        grid-template-columns: 1fr 1.2fr;
+    }
+    #content.tab:has(.contact) section:nth-child(2n+1) .section-solid-bg.with-side-image{
+        grid-template-areas:
+            "img h3"
+            "img data";
+        grid-template-columns: 1.2fr 1fr;
+    }
+}
+#content.tab:has(.contact) section .section-solid-bg.with-side-image h3{
+    grid-area: h3;
+}
+#content.tab:has(.contact) section .section-solid-bg.with-side-image .img{
+    grid-area: img;
+    min-height: min-content;
+}
+#content.tab:has(.contact) section .section-solid-bg.with-side-image .data{
+    grid-area: data;
+}
+
+/* See https://blog.duda.co/responsive-google-maps-for-your-website */
+.map{
+    overflow:hidden;
+    border-radius: var(--map-radius);
+    padding-bottom: 56.25%;
+    margin: var(--tab-section-padding);
+    position:relative;
+    height:0;
+}
+.map iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
