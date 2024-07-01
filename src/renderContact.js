@@ -1,4 +1,6 @@
 import { removeDescendants } from "./domUtils.js";
+import initGenericTab from "./initGenericTab.js";
+import initGenericSection from "./initGenericSection.js";
 
 // in the following csv file, each line refers to a section in the contact tab
 import contactTabInfo from "./data/contact-info.json";
@@ -8,97 +10,61 @@ import contactImg_0 from "./img/contact-0.jpg";
 import contactImg_1 from "./img/contact-1.jpg";
 import contactImg_2 from "./img/contact-2.jpg";
 
-const contactImg = [contactImg_0, contactImg_1, contactImg_2];
-
 export default function renderContact(contentDiv) {
   removeDescendants(contentDiv);
+  contentDiv.setAttribute("class", "");
   createContact(contentDiv);
 }
 
 function createContact(contentDiv) {
-  const titleH2 = document.createElement("h2");
-  titleH2.textContent = "contact";
-  // the following class will be used to style the contact nav button when showing the contact page
-  titleH2.classList.add("contact");
-
-  const header = document.createElement("header");
-  header.appendChild(titleH2);
-
-  contentDiv.classList.toggle("tab", true);
-  contentDiv.appendChild(header);
+  initGenericTab(contentDiv, "contact");
   contentDiv.appendChild(createContactInfoSection());
   contentDiv.appendChild(createOpeningHoursSection());
-  contentDiv.appendChild(createDividerSection());
   contentDiv.appendChild(createBookNowSection());
 }
 
 function createContactInfoSection() {
-  const titleSide = document.createElement("div");
+  const [section, txtSide] = initGenericSection(
+    "Get in Touch!",
+    contactImg_0,
+    true
+  );
 
-  const h3 = document.createElement("h3");
-  h3.textContent = "Get in Touch!";
-  titleSide.appendChild(h3);
+  // Add contact info div
+  const contactInfoDiv = document.createElement("div");
+  contactInfoDiv.classList.add("contact-info");
 
-  const imgSide = document.createElement("div");
-  imgSide.classList.add("img");
-  imgSide.style.backgroundImage = `url(${contactImg_0})`;
-
-  const dataSide = document.createElement("div");
-  dataSide.classList.add("data");
-
-  const keys = Object.keys(contactTabInfo);
-  keys.forEach((key) => {
+  Object.keys(contactTabInfo).forEach((key) => {
     if (key === "lon" || key === "lat") return;
 
     const fieldP = document.createElement("p");
     fieldP.classList.add(key);
     fieldP.textContent = contactTabInfo[key];
 
-    dataSide.appendChild(fieldP);
+    contactInfoDiv.appendChild(fieldP);
   });
 
+  txtSide.appendChild(contactInfoDiv);
+
+  // Add location map
   const mapsDiv = document.createElement("div");
-  mapsDiv.classList.add("map");
+  mapsDiv.classList.add("location-map");
   mapsDiv.innerHTML = `<iframe src="https://maps.google.com/maps?q=${contactTabInfo.lon},${contactTabInfo.lat}&z=15&output=embed" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
-  dataSide.appendChild(mapsDiv);
-
-  const section = document.createElement("section");
-  const sectionSolidBg = document.createElement("div");
-  sectionSolidBg.classList.add("section-solid-bg");
-  sectionSolidBg.classList.add("with-side-image");
-
-  sectionSolidBg.appendChild(titleSide);
-  sectionSolidBg.appendChild(imgSide);
-  sectionSolidBg.appendChild(dataSide);
-  section.appendChild(sectionSolidBg);
+  txtSide.appendChild(mapsDiv);
 
   return section;
 }
 
 function createOpeningHoursSection() {
-  const titleSide = document.createElement("div");
+  const [section, txtSide] = initGenericSection(
+    "Opening hours",
+    contactImg_1,
+    true
+  );
 
-  const h3 = document.createElement("h3");
-  h3.textContent = "Opening hours";
-  titleSide.appendChild(h3);
-
-  const imgSide = document.createElement("div");
-  imgSide.classList.add("img");
-  imgSide.style.backgroundImage = `url(${contactImg_1})`;
-
-  const openingHoursSide = document.createElement("div");
-  openingHoursSide.classList.add("data");
-  openingHoursSide.classList.add("days-and-hours");
-
-  const section = document.createElement("section");
-  const sectionSolidBg = document.createElement("div");
-  sectionSolidBg.classList.add("section-solid-bg");
-  sectionSolidBg.classList.add("with-side-image");
-
-  sectionSolidBg.appendChild(titleSide);
-  sectionSolidBg.appendChild(imgSide);
-  sectionSolidBg.appendChild(openingHoursSide);
-  section.appendChild(sectionSolidBg);
+  // Add contact info div
+  const openingHoursDiv = document.createElement("div");
+  openingHoursDiv.classList.add("days-and-hours");
 
   contactTabOpeningHoursInfo.forEach((openingHoursInfo) => {
     const pDays = document.createElement("p");
@@ -109,9 +75,11 @@ function createOpeningHoursSection() {
     pHours.classList.add("hours");
     pHours.textContent = openingHoursInfo[1];
 
-    openingHoursSide.appendChild(pDays);
-    openingHoursSide.appendChild(pHours);
+    openingHoursDiv.appendChild(pDays);
+    openingHoursDiv.appendChild(pHours);
   });
+
+  txtSide.appendChild(openingHoursDiv);
 
   return section;
 }
@@ -127,19 +95,6 @@ function createBookNowSection() {
   const spaceDiv = document.createElement("div");
   spaceDiv.classList.add("space");
   section.appendChild(spaceDiv);
-
-  return section;
-}
-
-function createDividerSection() {
-  const section = document.createElement("section");
-  const sectionSolidBg = document.createElement("div");
-  sectionSolidBg.classList.add("section-solid-bg");
-
-  const dividerDiv = document.createElement("div");
-  dividerDiv.classList.add("divider");
-  sectionSolidBg.appendChild(dividerDiv);
-  section.appendChild(sectionSolidBg);
 
   return section;
 }

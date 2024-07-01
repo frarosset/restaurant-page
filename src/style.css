@@ -370,7 +370,9 @@ a:visited {
   --section-col-h3: var(--col-h3);
 }
 
-#content.tab section .section-solid-bg {
+#content.tab section .section-solid-bg,
+#content.tab section,
+#content.tab section .txt-side {
   background-color: var(--section-bg-col-txt);
 }
 #content.tab section h3 {
@@ -390,11 +392,9 @@ a:visited {
 #content.tab section .space {
   min-height: var(--tab-section-empty-space);
 }
-#content.tab section .divider {
-  height: var(--tab-section-empty-divider);
-}
 
-#content.tab section .img {
+#content.tab section .img,
+#content.tab section .img-side {
   min-height: var(--tab-section-empty-space);
   background-repeat: no-repeat;
   background-size: cover;
@@ -440,56 +440,44 @@ a:visited {
 }
 
 /* rules specific to contact tab */
-#content.tab:has(.contact) div.data.days-and-hours {
+#content.tab.contact div.data.days-and-hours {
   display: grid;
   justify-content: space-between;
   grid-template-columns: max-content 2fr;
 }
 
-#content.tab:has(.contact) section .section-solid-bg.with-side-image {
+#content.tab.contact section.with-side-image {
   display: grid;
-  grid-template-rows: var(--tab-section-empty-space) min-content min-content;
+  grid-template-rows: min-content var(--tab-section-empty-space);
   grid-template-areas:
-    "img"
-    "h3"
-    "data";
+    "txt"
+    "img";
   grid-template-columns: 1fr;
 }
 
 @media only screen and (min-width: 768px), (orientation: landscape) {
-  #content.tab:has(.contact) section .section-solid-bg.with-side-image {
+  #content.tab.contact section.with-side-image {
     grid-template-rows: min-content min-content;
   }
-  #content.tab:has(.contact)
-    section:nth-child(2n)
-    .section-solid-bg.with-side-image {
-    grid-template-areas:
-      "h3 img"
-      "data img";
+  #content.tab.contact section:nth-child(2n).with-side-image {
+    grid-template-areas: "txt img";
     grid-template-columns: 1fr 1.2fr;
   }
-  #content.tab:has(.contact)
-    section:nth-child(2n + 1)
-    .section-solid-bg.with-side-image {
-    grid-template-areas:
-      "img h3"
-      "img data";
+  #content.tab.contact section:nth-child(2n + 1).with-side-image {
+    grid-template-areas: "img txt";
     grid-template-columns: 1.2fr 1fr;
   }
 }
-#content.tab:has(.contact) section .section-solid-bg.with-side-image h3 {
-  grid-area: h3;
+#content.tab.contact section.with-side-image .txt-side {
+  grid-area: txt;
 }
-#content.tab:has(.contact) section .section-solid-bg.with-side-image .img {
+#content.tab.contact section.with-side-image .img-side {
   grid-area: img;
   min-height: min-content;
 }
-#content.tab:has(.contact) section .section-solid-bg.with-side-image .data {
-  grid-area: data;
-}
 
 /* See https://blog.duda.co/responsive-google-maps-for-your-website */
-.map {
+.location-map {
   overflow: hidden;
   border-radius: var(--map-radius);
   padding-bottom: 56.25%;
@@ -497,7 +485,7 @@ a:visited {
   position: relative;
   height: 0;
 }
-.map iframe {
+.location-map iframe {
   left: 0;
   top: 0;
   height: 100%;
