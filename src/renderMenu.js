@@ -1,4 +1,6 @@
 import { removeDescendants } from "./domUtils.js";
+import initGenericTab from "./initGenericTab.js";
+import initGenericSection from "./initGenericSection.js";
 
 // in the following csv file, each line refers to a section in the menu tab
 import menuTabSectionsInfo from "./data/menu-sections.csv";
@@ -15,72 +17,54 @@ const menuImg = [menuImg_0, menuImg_1, menuImg_2, menuImg_3, menuImg_4];
 
 export default function renderMenu(contentDiv) {
   removeDescendants(contentDiv);
+  contentDiv.setAttribute("class", "");
   createMenu(contentDiv);
 }
 
 function createMenu(contentDiv) {
-  const titleH2 = document.createElement("h2");
-  titleH2.textContent = "menu";
-  // the following class will be used to style the menu nav button when showing the menu page
-  titleH2.classList.add("menu");
+  initGenericTab(contentDiv, "menu");
 
-  const header = document.createElement("header");
-  header.appendChild(titleH2);
+  // Create the menu sections
+  menuTabSectionsInfo.forEach((sectionInfo) =>
+    contentDiv.appendChild(createMenuSection(sectionInfo))
+  );
 
-  const sections = [];
-  const dishesSides = [];
-  menuTabSectionsInfo.forEach((sectionInfo) => {
-    const titleSide = document.createElement("div");
+  // Add the dishes in the proper sections
+  const dishesDivs = [...contentDiv.querySelectorAll(".dishes")];
+  menuTabDishesInfo.forEach((dishInfo) => createDish(dishInfo, dishesDivs));
+}
 
-    const h3 = document.createElement("h3");
-    h3.textContent = sectionInfo[1];
-    titleSide.appendChild(h3);
+function createMenuSection(menuData) {
+  const [section, txtSide] = initGenericSection(
+    menuData[1],
+    menuImg[menuData[0]],
+    { withSideImage: true, hasSubsections: true }
+  );
 
-    const imgSide = document.createElement("div");
-    imgSide.classList.add("img");
-    imgSide.style.backgroundImage = `url(${menuImg[sectionInfo[0]]})`;
+  const dishesDiv = document.createElement("div");
+  dishesDiv.classList.add("dishes");
+  txtSide.appendChild(dishesDiv);
 
-    const dishesSide = document.createElement("div");
-    dishesSide.classList.add("dishes");
+  return section;
+}
 
-    const section = document.createElement("section");
-    section.classList.add("has-subsections");
-    const sectionSolidBg = document.createElement("div");
-    sectionSolidBg.classList.add("section-solid-bg");
+function createDish(dishInfo, dishesDivs) {
+  const h4 = document.createElement("h4");
+  h4.textContent = dishInfo[0];
 
-    sectionSolidBg.appendChild(titleSide);
-    sectionSolidBg.appendChild(imgSide);
-    sectionSolidBg.appendChild(dishesSide);
-    section.appendChild(sectionSolidBg);
+  const pPrice = document.createElement("span");
+  pPrice.textContent = dishInfo[2];
+  pPrice.classList.add("price");
 
-    sections.push(section);
-    dishesSides.push(dishesSide);
-  });
+  const pIngredients = document.createElement("p");
+  pIngredients.textContent = dishInfo[3];
 
-  menuTabDishesInfo.forEach((dishInfo) => {
-    const h4AndPrice = document.createElement("div");
-    h4AndPrice.classList.add("h4-and-price");
+  const dish = document.createElement("div");
+  dish.classList.add("dish");
 
-    const h4 = document.createElement("h4");
-    h4.textContent = dishInfo[0];
+  dish.appendChild(h4);
+  dish.appendChild(pPrice);
+  dish.appendChild(pIngredients);
 
-    const pPrice = document.createElement("span");
-    pPrice.textContent = dishInfo[2];
-    pPrice.classList.add("price");
-
-    const pIngredients = document.createElement("p");
-    pIngredients.textContent = dishInfo[3];
-
-    const dish = document.createElement("div");
-    h4AndPrice.appendChild(h4);
-    h4AndPrice.appendChild(pPrice);
-    dish.appendChild(h4AndPrice);
-    dish.appendChild(pIngredients);
-
-    dishesSides[dishInfo[1]].appendChild(dish);
-  });
-
-  contentDiv.classList.toggle("tab", true);
-  contentDiv.appendChild(header);
-  sections.forEach((section) => contentDiv.appendChild(section));
+  dishesDivs[dishInfo[1]].appendChild(dish);
 }

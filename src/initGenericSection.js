@@ -1,8 +1,11 @@
-export default function initGenericSection(
-  title,
-  imgUrl,
-  withSideImage = false
-) {
+export default function initGenericSection(title, imgUrl, options = {}) {
+  const defaultOptions = {
+    withSideImage: false,
+    hasSubsections: false,
+  };
+
+  options = Object.assign(defaultOptions, options);
+
   //Init the section
   const section = document.createElement("section");
 
@@ -18,7 +21,7 @@ export default function initGenericSection(
   const returnObject = [section, txtSide];
 
   // Image side
-  if (withSideImage) {
+  if (options.withSideImage) {
     section.classList.add("with-side-image");
 
     const imgSide = document.createElement("div");
@@ -27,6 +30,10 @@ export default function initGenericSection(
     section.appendChild(imgSide);
 
     returnObject.push(imgSide);
+  }
+
+  if (options.hasSubsections) {
+    section.classList.add("has-subsections");
   }
 
   return returnObject;

@@ -227,7 +227,8 @@ a:visited {
   pointer-events: none;
 }
 .screen-height:has(h2.about) > header nav button.about-btn,
-.screen-height:has(h2.menu) > header nav button.menu-btn {
+.screen-height:has(.tab.menu) > header nav button.menu-btn,
+.screen-height:has(.tab.contact) > header nav button.contact-btn {
   background-color: var(--bg-col-txt);
   transform: scale(var(--nav-btn-sel-scale));
   pointer-events: none;
@@ -333,19 +334,6 @@ a:visited {
   padding-top: 0;
   font-size: var(--tab-p-fontsize);
 }
-#content.tab section .h4-and-price {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--tab-section-padding);
-  gap: var(--tab-h4-price-gap);
-  padding-bottom: var(--tab-subsection-gap);
-}
-#content.tab section span.price {
-  border-radius: var(--sel-radius);
-  padding: var(--tab-price-padding);
-  font-size: var(--tab-price-fontsize);
-}
 
 #content.tab section:nth-child(2n) {
   --section-bg-col-txt: var(--bg-col-txt-alt);
@@ -384,10 +372,6 @@ a:visited {
 #content.tab section p {
   color: var(--section-col-txt);
 }
-#content.tab section span.price {
-  background-color: var(--section-bg-col-alt);
-  color: var(--section-col-txt-alt);
-}
 
 #content.tab section .space {
   min-height: var(--tab-section-empty-space);
@@ -402,45 +386,65 @@ a:visited {
 }
 
 /* rules specific to menu tab */
-#content.tab:has(.menu) section .section-solid-bg {
+#content.tab.menu section {
   display: grid;
-  grid-template-rows: min-content min-content min-content;
+  grid-template-rows: min-content min-content;
   grid-template-areas:
     "img"
-    "h3"
-    "dishes";
+    "txt";
   grid-template-columns: 1fr;
 }
 
 @media only screen and (min-width: 768px), (orientation: landscape) {
-  #content.tab:has(.menu) section .section-solid-bg {
+  #content.tab.menu section {
     grid-template-rows: min-content min-content;
   }
-  #content.tab:has(.menu) section:nth-child(2n) .section-solid-bg {
-    grid-template-areas:
-      "h3 img"
-      "dishes img";
+  #content.tab.menu section:nth-child(2n) {
+    grid-template-areas: "txt img";
     grid-template-columns: 1fr 1.2fr;
   }
-  #content.tab:has(.menu) section:nth-child(2n + 1) .section-solid-bg {
-    grid-template-areas:
-      "img h3"
-      "img dishes";
+  #content.tab.menu section:nth-child(2n + 1) {
+    grid-template-areas: "img txt";
     grid-template-columns: 1.2fr 1fr;
   }
 }
-#content.tab:has(.menu) section .section-solid-bg h3 {
-  grid-area: h3;
+#content.tab.menu section .txt-side {
+  grid-area: txt;
 }
-#content.tab:has(.menu) section .section-solid-bg .img {
+#content.tab.menu section .img-side {
   grid-area: img;
 }
-#content.tab:has(.menu) section .section-solid-bg .dishes {
-  grid-area: dishes;
+
+#content.tab.menu section .dish {
+  display: grid;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--tab-section-padding);
+  gap: var(--tab-h4-price-gap) var(--tab-subsection-gap);
+  grid-template-areas:
+    "h4 price"
+    "p p";
+  grid-template-columns: 1fr max-content;
+}
+#content.tab.menu .dish h4 {
+  grid-area: h4;
+}
+#content.tab.menu .dish .price {
+  border-radius: var(--sel-radius);
+  padding: var(--tab-price-padding);
+  font-size: var(--tab-price-fontsize);
+  background-color: var(--section-bg-col-alt);
+  color: var(--section-col-txt-alt);
+  grid-area: price;
+}
+#content.tab.menu .dish p {
+  grid-area: p;
+  justify-self: left;
+  padding: 0;
 }
 
 /* rules specific to contact tab */
-#content.tab.contact div.data.days-and-hours {
+#content.tab.contact div.days-and-hours {
   display: grid;
   justify-content: space-between;
   grid-template-columns: max-content 2fr;

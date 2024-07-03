@@ -24,11 +24,9 @@ function createContact(contentDiv) {
 }
 
 function createContactInfoSection() {
-  const [section, txtSide] = initGenericSection(
-    "Get in Touch!",
-    contactImg_0,
-    true
-  );
+  const [section, txtSide] = initGenericSection("Get in Touch!", contactImg_0, {
+    withSideImage: true,
+  });
 
   // Add contact info div
   const contactInfoDiv = document.createElement("div");
@@ -56,11 +54,9 @@ function createContactInfoSection() {
 }
 
 function createOpeningHoursSection() {
-  const [section, txtSide] = initGenericSection(
-    "Opening hours",
-    contactImg_1,
-    true
-  );
+  const [section, txtSide] = initGenericSection("Opening hours", contactImg_1, {
+    withSideImage: true,
+  });
 
   // Add contact info div
   const openingHoursDiv = document.createElement("div");
