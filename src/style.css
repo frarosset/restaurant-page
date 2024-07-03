@@ -226,7 +226,7 @@ a:visited {
 .screen-height:has(.home-txt) > header .logo-and-name {
   pointer-events: none;
 }
-.screen-height:has(h2.about) > header nav button.about-btn,
+.screen-height:has(.tab.about) > header nav button.about-btn,
 .screen-height:has(.tab.menu) > header nav button.menu-btn,
 .screen-height:has(.tab.contact) > header nav button.contact-btn {
   background-color: var(--bg-col-txt);
@@ -373,16 +373,20 @@ a:visited {
   color: var(--section-col-txt);
 }
 
-#content.tab section .space {
-  min-height: var(--tab-section-empty-space);
-}
-
-#content.tab section .img,
 #content.tab section .img-side {
   min-height: var(--tab-section-empty-space);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+#content.tab section .img-side.img-side-fixed {
+  background-attachment: fixed;
+}
+
+#content.tab.about p {
+  text-wrap: wrap;
+  text-wrap: pretty; /* if supported */
 }
 
 /* rules specific to menu tab */

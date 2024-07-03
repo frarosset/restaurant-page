@@ -1,4 +1,6 @@
 import { removeDescendants } from "./domUtils.js";
+import initGenericTab from "./initGenericTab.js";
+import initGenericSection from "./initGenericSection.js";
 
 // in the following csv file, each line refers to a section in the about tab
 import aboutTabSectionsInfo from "./data/about-sections.csv";
@@ -12,43 +14,34 @@ const aboutImg = [aboutImg_0, aboutImg_1, aboutImg_2, aboutImg_3];
 
 export default function renderAbout(contentDiv) {
   removeDescendants(contentDiv);
+  contentDiv.setAttribute("class", "");
   createAbout(contentDiv);
 }
 
 function createAbout(contentDiv) {
-  const titleH2 = document.createElement("h2");
-  titleH2.textContent = "about";
-  // the following class will be used to style the about nav button when showing the about page
-  titleH2.classList.add("about");
+  initGenericTab(contentDiv, "about");
 
-  const header = document.createElement("header");
-  header.appendChild(titleH2);
-
-  const sections = [];
+  // Create the about sections
   aboutTabSectionsInfo.forEach((sectionInfo) => {
-    const h3 = document.createElement("h3");
-    h3.textContent = sectionInfo[1];
-
-    const p = document.createElement("p");
-    p.textContent = sectionInfo[2];
-
-    const spaceDiv = document.createElement("div");
-    spaceDiv.classList.add("space");
-
-    const section = document.createElement("section");
-    const sectionSolidBg = document.createElement("div");
-    sectionSolidBg.classList.add("section-solid-bg");
-
-    sectionSolidBg.appendChild(h3);
-    sectionSolidBg.appendChild(p);
-
-    section.appendChild(sectionSolidBg);
-    section.appendChild(spaceDiv);
-    section.style.backgroundImage = `url(${aboutImg[sectionInfo[0]]})`;
-    sections.push(section);
+    contentDiv.appendChild(createAboutSection(sectionInfo));
   });
+}
 
-  contentDiv.classList.toggle("tab", true);
-  contentDiv.appendChild(header);
-  sections.forEach((section) => contentDiv.appendChild(section));
+function createAboutSection(sectionInfo) {
+  const [section, txtSide] = initGenericSection(
+    sectionInfo[1],
+    aboutImg[sectionInfo[0]],
+    { withSideImage: true, withFixedImage: true }
+  );
+
+  const descriptionDiv = document.createElement("div");
+  descriptionDiv.classList.add("description");
+  sectionInfo[2].split("\\\\").forEach((pData) => {
+    const p = document.createElement("p");
+    p.textContent = pData;
+    descriptionDiv.appendChild(p);
+  });
+  txtSide.appendChild(descriptionDiv);
+
+  return section;
 }
