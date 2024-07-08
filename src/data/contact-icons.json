@@ -1,0 +1,5 @@
+{
+  "address": ["solid", "location-dot"],
+  "phone": ["solid", "phone"],
+  "email": ["solid", "envelope"]
+}

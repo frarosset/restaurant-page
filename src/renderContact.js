@@ -1,10 +1,12 @@
 import { removeDescendants } from "./domUtils.js";
 import initGenericTab from "./initGenericTab.js";
 import initGenericSection from "./initGenericSection.js";
+import { setFaIconAndLabel } from "./fontAwesomeUtilities.js";
 
 // in the following csv file, each line refers to a section in the contact tab
 import contactTabInfo from "./data/contact-info.json";
 import contactTabOpeningHoursInfo from "./data/contact-opening-hours.csv";
+import contactTabIcons from "./data/contact-icons.json";
 
 import contactImg_0 from "./img/contact-0.jpg";
 import contactImg_1 from "./img/contact-1.jpg";
@@ -39,7 +41,13 @@ function createContactInfoSection() {
 
     const fieldP = document.createElement("p");
     fieldP.classList.add(key);
-    fieldP.textContent = contactTabInfo[key];
+
+    setFaIconAndLabel(
+      fieldP,
+      { prefix: contactTabIcons[key][0], icon: contactTabIcons[key][1] },
+      contactTabInfo[key]
+    );
+    //fieldP.textContent = contactTabInfo[key];
 
     contactInfoDiv.appendChild(fieldP);
   });

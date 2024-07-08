@@ -477,6 +477,7 @@ a:visited {
   color: var(--section-col-h4);
   font-variant: small-caps;
   text-transform: lowercase;
+  font-weight: bold;
 }
 
 #content.tab.contact .txt-side .hours {
@@ -495,8 +496,13 @@ a:visited {
   }
 }
 
-/* See https://blog.duda.co/responsive-google-maps-for-your-website */
+svg.svg-inline--fa {
+  margin-right: 0.5em;
+  vertical-align: top;
+  color: var(--section-col-h3);
+}
 
+/* See https://blog.duda.co/responsive-google-maps-for-your-website */
 .location-map {
   overflow: hidden;
   border-radius: var(--map-radius);
