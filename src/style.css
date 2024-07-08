@@ -8,15 +8,8 @@
   font-family: "JosefinSans";
   src: url("font/Josefin_Sans/JosefinSans-VariableFont_wght.ttf")
     format("truetype");
-  font-weight: 125 950;
+  font-weight: 400 800;
   font-style: normal;
-}
-@font-face {
-  font-family: "JosefinSans";
-  src: url("font/Josefin_Sans/JosefinSans-Italic-VariableFont_wght.ttf")
-    format("truetype");
-  font-weight: 125 950;
-  font-style: italic;
 }
 
 :root {
@@ -39,7 +32,7 @@
   --col-txt-alt: var(--col-white);
   --col-h2-home: var(--col-accent);
   --col-p-home: var(--col-pure-white);
-  --col-h2-tab: var(--col-pure-white);
+  --col-h2-tab: var(--col-black);
   --col-h3: var(--col-black);
   --col-h3-alt: var(--col-white);
   --col-h4: var(--col-dark-grey);
@@ -51,7 +44,7 @@
   --title-font: "Satisfy", serif;
 
   /* Font sizes */
-  --txt-fontsize: 18px;
+  --txt-fontsize: max(18px, 1vw);
   --txt-lineheight: 1.2;
   --title-font-size: 2.5rem;
   --home-h2-fontsize: 4vw;
@@ -74,16 +67,17 @@
   --header-padding: 1rem;
   --header-gap: 1rem;
   --tab-header-padding: 3rem;
-  --tab-section-padding: 2rem;
+  --tab-section-padding: 3.5rem 2rem;
   --tab-section-gap: 2rem;
-  --tab-subsection-gap: 0.5rem;
-  --tab-section-empty-space: 50vh;
-  --tab-section-empty-divider: 1.5rem;
+  --tab-div-inside-section-gap: 1rem 2rem;
+  --tab-div-inside-section-with-subsections-gap: 2rem 2rem;
+  --tab-div-inside-subsections-gap: 0.5rem 0.5rem;
+  --tab-section-empty-space: 60vh;
   --tab-price-padding: 0.3em 0.5em;
-  --tab-h4-price-gap: 0.5em;
   --nav-gap: 1em;
   --nav-btn-padding: 0.5em 1em;
   --nav-btn-sel-scale: 1.2;
+  --contact-hours-horizontal-gap: 3rem;
 
   /* Radius */
   --radius: 4rem;
@@ -92,8 +86,6 @@
 
   /* Shadows */
   --text-shadow: 3px 3px 3px var(--col-black);
-  --text-shadow-larger: 5px 0px 10px var(--col-black),
-    5px 5px 5px var(--col-dark-grey);
 
   /* Animations on hover / active / ...*/
   /* --transition-time: 0.8s; */
@@ -132,6 +124,14 @@ body {
   /* or max-width -- this avoids horizontal scroll bars */
 
   touch-action: manipulation; /* disable double tap to zoom on some browsers*/
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body > * {
+  width: 100%;
 }
 
 .screen-height {
@@ -147,32 +147,17 @@ body {
   flex-direction: column;
 }
 
-/*****************************************************/
-
-/* || Generic */
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-body > * {
-  width: 100%;
-}
-
-.screen-height > header,
-.main {
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
-
 h1,
 h2,
 h3,
 h4,
 p {
   text-wrap: balance;
+}
+
+p {
+  text-wrap: wrap;
+  text-wrap: pretty; /* if supported */
 }
 
 ul {
@@ -189,6 +174,10 @@ a:visited {
 /* HEADER */
 
 .screen-height > header {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -283,6 +272,7 @@ a:visited {
 .home-txt h2 {
   font-size: var(--home-h2-fontsize);
   color: var(--col-h2-home);
+  text-transform: uppercase;
 }
 .highlight {
   font-family: var(--main-font-alt);
@@ -295,45 +285,6 @@ a:visited {
 }
 
 /* TAB PAGES */
-#content.tab header {
-  padding: var(--tab-header-padding);
-}
-#content.tab h2 {
-  font-size: var(--tab-h2-fontsize);
-  font-variant: small-caps;
-  color: var(--col-h2-tab);
-  text-shadow: var(--text-shadow-larger);
-}
-
-#content.tab section {
-  width: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  flex: 1;
-}
-#content.tab section h3 {
-  padding: var(--tab-section-padding);
-  padding-bottom: var(--tab-section-gap);
-  font-family: var(--main-font-alt);
-  font-size: var(--tab-h3-fontsize);
-}
-#content.tab section.has-subsections h3 {
-  font-size: var(--tab-h3-menu-fontsize);
-  font-variant: small-caps;
-  font-family: var(--main-font);
-  text-align: center;
-}
-#content.tab section h4 {
-  font-family: var(--main-font-alt);
-  font-size: var(--tab-h4-fontsize);
-}
-#content.tab section p {
-  padding: var(--tab-section-padding);
-  padding-top: 0;
-  font-size: var(--tab-p-fontsize);
-}
 
 #content.tab section:nth-child(2n) {
   --section-bg-col-txt: var(--bg-col-txt-alt);
@@ -358,18 +309,64 @@ a:visited {
   --section-col-h3: var(--col-h3);
 }
 
-#content.tab section .section-solid-bg,
-#content.tab section,
-#content.tab section .txt-side {
-  background-color: var(--section-bg-col-txt);
+#content.tab header {
+  padding: var(--tab-header-padding);
 }
+#content.tab h2 {
+  font-size: var(--tab-h2-fontsize);
+  text-transform: uppercase;
+  color: var(--col-h2-tab);
+  font-weight: 800;
+}
+
+#content.tab section {
+  background-color: var(--section-bg-col-txt);
+  width: 100%;
+  flex: 1;
+}
+
+#content.tab section .txt-side,
+#content.tab section .txt-side > div,
+#content.tab section .txt-side > div > div {
+  display: flex;
+  flex-direction: column;
+}
+
+#content.tab section .txt-side {
+  padding: var(--tab-section-padding);
+  gap: var(--tab-section-gap);
+}
+
+#content.tab section .txt-side > div {
+  gap: var(--tab-div-inside-section-gap);
+}
+
+#content.tab section.has-subsections .txt-side > div {
+  gap: var(--tab-div-inside-section-with-subsections-gap);
+}
+
+#content.tab section .txt-side > div > div {
+  gap: var(--tab-div-inside-subsections-gap);
+}
+
 #content.tab section h3 {
+  font-family: var(--main-font-alt);
+  font-size: var(--tab-h3-fontsize);
   color: var(--section-col-h3);
 }
+#content.tab section.has-subsections h3 {
+  font-size: var(--tab-h3-menu-fontsize);
+  font-variant: small-caps;
+  font-family: var(--main-font);
+  text-align: center;
+}
 #content.tab section h4 {
+  font-family: var(--main-font-alt);
+  font-size: var(--tab-h4-fontsize);
   color: var(--section-col-h4);
 }
 #content.tab section p {
+  font-size: var(--tab-p-fontsize);
   color: var(--section-col-txt);
 }
 
@@ -380,51 +377,53 @@ a:visited {
   background-position: center;
 }
 
-#content.tab section .img-side.img-side-fixed {
+#content.tab section.with-side-image.img-side-fixed .img-side {
   background-attachment: fixed;
 }
 
-#content.tab.about p {
-  text-wrap: wrap;
-  text-wrap: pretty; /* if supported */
-}
-
-/* rules specific to menu tab */
-#content.tab.menu section {
+#content.tab section.with-side-image.img-alternate {
   display: grid;
-  grid-template-rows: min-content min-content;
   grid-template-areas:
     "img"
     "txt";
   grid-template-columns: 1fr;
+  grid-template-rows: min-content min-content;
+  --txt-side-width: 1fr; /* used in the next media query */
+  --img-side-width: 1.2fr; /* used in the next media query */
 }
 
 @media only screen and (min-width: 768px), (orientation: landscape) {
-  #content.tab.menu section {
-    grid-template-rows: min-content min-content;
+  #content.tab section.with-side-image.img-alternate {
+    grid-template-rows: min-content;
   }
-  #content.tab.menu section:nth-child(2n) {
+
+  #content.tab
+    section.with-side-image.img-alternate.img-first:nth-child(2n + 1),
+  #content.tab section.with-side-image.img-alternate:nth-child(2n) {
     grid-template-areas: "txt img";
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: var(--txt-side-width) var(--img-side-width);
   }
-  #content.tab.menu section:nth-child(2n + 1) {
+
+  #content.tab section.with-side-image.img-alternate:nth-child(2n + 1),
+  #content.tab section.with-side-image.img-alternate.img-first:nth-child(2n) {
     grid-template-areas: "img txt";
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: var(--img-side-width) var(--txt-side-width);
   }
 }
-#content.tab.menu section .txt-side {
+
+#content.tab section.with-side-image.img-alternate .txt-side {
   grid-area: txt;
 }
-#content.tab.menu section .img-side {
+#content.tab section.with-side-image.img-alternate .img-side {
   grid-area: img;
 }
+
+/* rules specific to menu tab */
 
 #content.tab.menu section .dish {
   display: grid;
   justify-content: space-between;
   align-items: center;
-  padding: var(--tab-section-padding);
-  gap: var(--tab-h4-price-gap) var(--tab-subsection-gap);
   grid-template-areas:
     "h4 price"
     "p p";
@@ -444,55 +443,57 @@ a:visited {
 #content.tab.menu .dish p {
   grid-area: p;
   justify-self: left;
-  padding: 0;
 }
 
 /* rules specific to contact tab */
+
+#content.tab.contact section.with-side-image.img-alternate {
+  --txt-side-width: minmax(max-content, 1fr);
+}
+
+#content.tab.contact section.with-side-image.img-alternate .txt-side {
+  max-width: max-content;
+}
+
 #content.tab.contact div.days-and-hours {
   display: grid;
   justify-content: space-between;
-  grid-template-columns: max-content 2fr;
+  grid-template-columns: max-content max-content;
 }
 
-#content.tab.contact section.with-side-image {
-  display: grid;
-  grid-template-rows: min-content var(--tab-section-empty-space);
-  grid-template-areas:
-    "txt"
-    "img";
-  grid-template-columns: 1fr;
+#content.tab.contact .txt-side .days {
+  color: var(--section-col-h4);
+  font-variant: small-caps;
+  text-transform: lowercase;
 }
 
-@media only screen and (min-width: 768px), (orientation: landscape) {
-  #content.tab.contact section.with-side-image {
-    grid-template-rows: min-content min-content;
-  }
-  #content.tab.contact section:nth-child(2n).with-side-image {
-    grid-template-areas: "txt img";
-    grid-template-columns: 1fr 1.2fr;
-  }
-  #content.tab.contact section:nth-child(2n + 1).with-side-image {
-    grid-template-areas: "img txt";
-    grid-template-columns: 1.2fr 1fr;
-  }
+#content.tab.contact .txt-side .hours {
+  display: flex;
+  flex-direction: column;
+  gap: 0px var(--contact-hours-horizontal-gap);
 }
-#content.tab.contact section.with-side-image .txt-side {
-  grid-area: txt;
+
+#content.tab.contact .txt-side .hour {
+  width: max-content;
 }
-#content.tab.contact section.with-side-image .img-side {
-  grid-area: img;
-  min-height: min-content;
+
+@media only screen and (min-width: 1024px) {
+  #content.tab.contact .txt-side .hours {
+    flex-direction: row;
+  }
 }
 
 /* See https://blog.duda.co/responsive-google-maps-for-your-website */
+
 .location-map {
   overflow: hidden;
   border-radius: var(--map-radius);
   padding-bottom: 56.25%;
-  margin: var(--tab-section-padding);
   position: relative;
   height: 0;
+  flex: 1;
 }
+
 .location-map iframe {
   left: 0;
   top: 0;

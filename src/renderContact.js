@@ -26,6 +26,8 @@ function createContact(contentDiv) {
 function createContactInfoSection() {
   const [section, txtSide] = initGenericSection("Get in Touch!", contactImg_0, {
     withSideImage: true,
+    imgAlternate: true,
+    imgFirst: true,
   });
 
   // Add contact info div
@@ -56,6 +58,8 @@ function createContactInfoSection() {
 function createOpeningHoursSection() {
   const [section, txtSide] = initGenericSection("Opening hours", contactImg_1, {
     withSideImage: true,
+    imgAlternate: true,
+    imgFirst: true,
   });
 
   // Add contact info div
@@ -67,9 +71,14 @@ function createOpeningHoursSection() {
     pDays.classList.add("days");
     pDays.textContent = openingHoursInfo[0];
 
-    const pHours = document.createElement("p");
+    const pHours = document.createElement("div");
     pHours.classList.add("hours");
-    pHours.textContent = openingHoursInfo[1];
+    openingHoursInfo[1].split(",").forEach((hour) => {
+      const pHour = document.createElement("p");
+      pHour.classList.add("hour");
+      pHour.textContent = hour.trim();
+      pHours.appendChild(pHour);
+    });
 
     openingHoursDiv.appendChild(pDays);
     openingHoursDiv.appendChild(pHours);

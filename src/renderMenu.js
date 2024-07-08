@@ -38,7 +38,7 @@ function createMenuSection(menuData) {
   const [section, txtSide] = initGenericSection(
     menuData[1],
     menuImg[menuData[0]],
-    { withSideImage: true, hasSubsections: true }
+    { withSideImage: true, imgAlternate: true, hasSubsections: true }
   );
 
   const dishesDiv = document.createElement("div");

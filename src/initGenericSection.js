@@ -1,6 +1,8 @@
 export default function initGenericSection(title, imgUrl, options = {}) {
   const defaultOptions = {
     withSideImage: false,
+    imgAlternate: false,
+    imgFirst: false,
     withFixedImage: false,
     hasSubsections: false,
   };
@@ -30,7 +32,9 @@ export default function initGenericSection(title, imgUrl, options = {}) {
     imgSide.style.backgroundImage = `url(${imgUrl})`;
     section.appendChild(imgSide);
 
-    if (options.withFixedImage) imgSide.classList.add("img-side-fixed");
+    if (options.withFixedImage) section.classList.add("img-side-fixed");
+    if (options.imgAlternate) section.classList.add("img-alternate");
+    if (options.imgFirst) section.classList.add("img-first");
 
     returnObject.push(imgSide);
   }
