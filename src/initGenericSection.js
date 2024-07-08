@@ -11,6 +11,9 @@ export default function initGenericSection(title, imgUrl, options = {}) {
 
   //Init the section
   const section = document.createElement("section");
+  const sectionCnt = document.createElement("div");
+  sectionCnt.classList.add("section-container");
+  section.appendChild(sectionCnt);
 
   // Text side: title (+ data, to be appended on the returned object)
   const titleH3 = document.createElement("h3");
@@ -19,7 +22,7 @@ export default function initGenericSection(title, imgUrl, options = {}) {
   const txtSide = document.createElement("div");
   txtSide.classList.add("txt-side");
   txtSide.appendChild(titleH3);
-  section.appendChild(txtSide);
+  sectionCnt.appendChild(txtSide);
 
   const returnObject = [section, txtSide];
 
@@ -30,7 +33,7 @@ export default function initGenericSection(title, imgUrl, options = {}) {
     const imgSide = document.createElement("div");
     imgSide.classList.add("img-side");
     imgSide.style.backgroundImage = `url(${imgUrl})`;
-    section.appendChild(imgSide);
+    sectionCnt.appendChild(imgSide);
 
     if (options.withFixedImage) section.classList.add("img-side-fixed");
     if (options.imgAlternate) section.classList.add("img-alternate");
