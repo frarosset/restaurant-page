@@ -1,12 +1,12 @@
 import { removeDescendants } from "./domUtils.js";
 import initGenericTab from "./initGenericTab.js";
 import initGenericSection from "./initGenericSection.js";
-
 import {
   initContactInfoDiv,
   initLocationMapDiv,
   initOpeningHoursDiv,
 } from "./initInfoDivFromData.js";
+import initBookForm from "./initBookForm.js";
 
 import contactImg_0 from "./img/contact-0.jpg";
 import contactImg_1 from "./img/contact-1.jpg";
@@ -62,9 +62,7 @@ function createBookNowSection() {
   h3.textContent = "Book Now (TODO)";
   section.appendChild(h3);
 
-  const spaceDiv = document.createElement("div");
-  spaceDiv.classList.add("space");
-  section.appendChild(spaceDiv);
+  section.appendChild(initBookForm());
 
   return section;
 }

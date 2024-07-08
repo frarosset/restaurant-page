@@ -1,0 +1,54 @@
+{
+  "name": {
+    "element": "input",
+    "label": "Name",
+    "icon": ["solid", "user"],
+    "constraints": { "type": "text", "maxLength": 30, "required": true }
+  },
+  "guests": {
+    "element": "input",
+    "label": "Guests",
+    "icon": ["solid", "people-group"],
+    "constraints": {
+      "type": "number",
+      "min": 1,
+      "max": 50,
+      "required": true
+    }
+  },
+  "date": {
+    "element": "input",
+    "label": "Date",
+    "icon": ["solid", "calendar-days"],
+    "constraints": { "type": "date", "required": true },
+    "dateRange": [0, 90]
+  },
+  "hour": {
+    "element": "input",
+    "label": "Hour",
+    "icon": ["solid", "clock"],
+    "constraints": {
+      "type": "time",
+      "maxlength": 30,
+      "required": true
+    }
+  },
+  "phone": {
+    "element": "input",
+    "label": "Phone",
+    "icon": ["solid", "phone"],
+    "constraints": { "type": "tel", "maxLength": 15, "required": true }
+  },
+  "email": {
+    "element": "input",
+    "label": "Email",
+    "icon": ["solid", "envelope"],
+    "constraints": { "type": "email", "maxLength": 30, "required": false }
+  },
+  "note": {
+    "element": "textarea",
+    "label": "Note",
+    "icon": ["solid", "pencil"],
+    "constraints": { "maxLength": 300, "rows": 6, "required": false }
+  }
+}
