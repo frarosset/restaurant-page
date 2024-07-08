@@ -6,11 +6,9 @@ import {
   initLocationMapDiv,
   initOpeningHoursDiv,
 } from "./initInfoDivFromData.js";
-import initBookForm from "./initBookForm.js";
 
 import contactImg_0 from "./img/contact-0.jpg";
 import contactImg_1 from "./img/contact-1.jpg";
-import contactImg_2 from "./img/contact-2.jpg";
 
 export default function renderContact(contentDiv) {
   removeDescendants(contentDiv);
@@ -22,7 +20,6 @@ function createContact(contentDiv) {
   initGenericTab(contentDiv, "contact");
   contentDiv.appendChild(createContactInfoSection());
   contentDiv.appendChild(createOpeningHoursSection());
-  contentDiv.appendChild(createBookNowSection());
 }
 
 function createContactInfoSection() {
@@ -50,19 +47,6 @@ function createOpeningHoursSection() {
 
   // Add contact info div
   txtSide.appendChild(initOpeningHoursDiv());
-
-  return section;
-}
-
-function createBookNowSection() {
-  const section = document.createElement("section");
-  section.style.backgroundImage = `url(${contactImg_2})`;
-
-  const h3 = document.createElement("h3");
-  h3.textContent = "Book Now (TODO)";
-  section.appendChild(h3);
-
-  section.appendChild(initBookForm());
 
   return section;
 }

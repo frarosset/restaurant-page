@@ -5,6 +5,7 @@ export default function initGenericSection(title, imgUrl, options = {}) {
     imgFirst: false,
     withFixedImage: false,
     hasSubsections: false,
+    withBgImage: false,
   };
 
   options = Object.assign(defaultOptions, options);
@@ -16,12 +17,16 @@ export default function initGenericSection(title, imgUrl, options = {}) {
   section.appendChild(sectionCnt);
 
   // Text side: title (+ data, to be appended on the returned object)
-  const titleH3 = document.createElement("h3");
-  titleH3.textContent = title;
 
   const txtSide = document.createElement("div");
   txtSide.classList.add("txt-side");
-  txtSide.appendChild(titleH3);
+
+  if (title) {
+    const titleH3 = document.createElement("h3");
+    titleH3.textContent = title;
+    txtSide.appendChild(titleH3);
+  }
+
   sectionCnt.appendChild(txtSide);
 
   const returnObject = [section, txtSide];
@@ -35,11 +40,17 @@ export default function initGenericSection(title, imgUrl, options = {}) {
     imgSide.style.backgroundImage = `url(${imgUrl})`;
     sectionCnt.appendChild(imgSide);
 
-    if (options.withFixedImage) section.classList.add("img-side-fixed");
+    if (options.withFixedImage) section.classList.add("img-fixed");
     if (options.imgAlternate) section.classList.add("img-alternate");
     if (options.imgFirst) section.classList.add("img-first");
 
     returnObject.push(imgSide);
+  } else if (options.withBgImage) {
+    section.classList.add("with-bg-image");
+
+    section.style.backgroundImage = `url(${imgUrl})`;
+
+    if (options.withFixedImage) section.classList.add("img-fixed");
   }
 
   if (options.hasSubsections) {

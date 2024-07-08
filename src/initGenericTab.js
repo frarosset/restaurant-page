@@ -6,6 +6,6 @@ export default function initGenericTab(contentDiv, name) {
   header.appendChild(titleH2);
 
   contentDiv.classList.toggle("tab", true);
-  contentDiv.classList.add(name);
+  contentDiv.classList.add(name.replace(" ", "-"));
   contentDiv.appendChild(header);
 }
