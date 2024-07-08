@@ -1,12 +1,12 @@
 import { removeDescendants } from "./domUtils.js";
 import initGenericTab from "./initGenericTab.js";
 import initGenericSection from "./initGenericSection.js";
-import { setFaIconAndLabel } from "./fontAwesomeUtilities.js";
 
-// in the following csv file, each line refers to a section in the contact tab
-import contactTabInfo from "./data/contact-info.json";
-import contactTabOpeningHoursInfo from "./data/contact-opening-hours.csv";
-import contactTabIcons from "./data/contact-icons.json";
+import {
+  initContactInfoDiv,
+  initLocationMapDiv,
+  initOpeningHoursDiv,
+} from "./initInfoDivFromData.js";
 
 import contactImg_0 from "./img/contact-0.jpg";
 import contactImg_1 from "./img/contact-1.jpg";
@@ -33,32 +33,10 @@ function createContactInfoSection() {
   });
 
   // Add contact info div
-  const contactInfoDiv = document.createElement("div");
-  contactInfoDiv.classList.add("contact-info");
-
-  Object.keys(contactTabInfo).forEach((key) => {
-    if (key === "lon" || key === "lat") return;
-
-    const fieldP = document.createElement("p");
-    fieldP.classList.add(key);
-
-    setFaIconAndLabel(
-      fieldP,
-      { prefix: contactTabIcons[key][0], icon: contactTabIcons[key][1] },
-      contactTabInfo[key]
-    );
-    //fieldP.textContent = contactTabInfo[key];
-
-    contactInfoDiv.appendChild(fieldP);
-  });
-
-  txtSide.appendChild(contactInfoDiv);
+  txtSide.appendChild(initContactInfoDiv());
 
   // Add location map
-  const mapsDiv = document.createElement("div");
-  mapsDiv.classList.add("location-map");
-  mapsDiv.innerHTML = `<iframe src="https://maps.google.com/maps?q=${contactTabInfo.lon},${contactTabInfo.lat}&z=15&output=embed" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
-  txtSide.appendChild(mapsDiv);
+  txtSide.appendChild(initLocationMapDiv());
 
   return section;
 }
@@ -71,28 +49,7 @@ function createOpeningHoursSection() {
   });
 
   // Add contact info div
-  const openingHoursDiv = document.createElement("div");
-  openingHoursDiv.classList.add("days-and-hours");
-
-  contactTabOpeningHoursInfo.forEach((openingHoursInfo) => {
-    const pDays = document.createElement("p");
-    pDays.classList.add("days");
-    pDays.textContent = openingHoursInfo[0];
-
-    const pHours = document.createElement("div");
-    pHours.classList.add("hours");
-    openingHoursInfo[1].split(",").forEach((hour) => {
-      const pHour = document.createElement("p");
-      pHour.classList.add("hour");
-      pHour.textContent = hour.trim();
-      pHours.appendChild(pHour);
-    });
-
-    openingHoursDiv.appendChild(pDays);
-    openingHoursDiv.appendChild(pHours);
-  });
-
-  txtSide.appendChild(openingHoursDiv);
+  txtSide.appendChild(initOpeningHoursDiv());
 
   return section;
 }

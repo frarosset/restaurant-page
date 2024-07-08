@@ -44,17 +44,17 @@
   --title-font: "Satisfy", serif;
 
   /* Font sizes */
-  --txt-fontsize: max(18px, 1vw);
+  --txt-fontsize: max(18px, 0.6vw);
   --txt-lineheight: 1.2;
   --title-font-size: 2.5rem;
   --home-h2-fontsize: 4vw;
   --home-txt-fontsize: 6vw;
   --tab-h2-fontsize: 4rem;
   --tab-h3-fontsize: 2rem;
-  --tab-h3-menu-fontsize: 3rem;
+  --tab-h3-menu-fontsize: 2.8rem;
   --tab-h4-fontsize: 2rem;
-  --tab-p-fontsize: 1.5rem;
-  --tab-price-fontsize: 1.8rem;
+  --tab-p-fontsize: 1rem;
+  --tab-price-fontsize: 1.2rem;
 
   --logo-size: calc(2 * var(--title-font-size));
 
@@ -75,7 +75,7 @@
   --tab-section-empty-space: 60vh;
   --tab-price-padding: 0.3em 0.5em;
   --nav-gap: 1em;
-  --nav-btn-padding: 0.5em 1em;
+  --nav-btn-padding: 0.5em 0.5em;
   --nav-btn-sel-scale: 1.2;
   --contact-hours-horizontal-gap: 3rem;
 
@@ -86,6 +86,7 @@
 
   /* Shadows */
   --text-shadow: 3px 3px 3px var(--col-black);
+  --box-shadow: 0px 0px 8px var(--col-black);
 
   /* Animations on hover / active / ...*/
   /* --transition-time: 0.8s; */
@@ -286,6 +287,10 @@ a:visited {
 
 /* TAB PAGES */
 
+#content:has(.tab) {
+  justify-content: flex-start;
+}
+
 #content.tab section:nth-child(2n) {
   --section-bg-col-txt: var(--bg-col-txt-alt);
   --section-col-h3: var(--col-h4-alt);
@@ -320,14 +325,15 @@ a:visited {
 }
 
 #content.tab section {
-  background-color: var(--section-bg-col-txt);
+  background-color: transparent;
   width: 100%;
-  flex: 1;
 }
 
 #content.tab section .section-container {
   max-width: var(--max-width);
   margin: 0 auto;
+  background-color: var(--section-bg-col-txt);
+  box-shadow: var(--box-shadow);
 }
 
 #content.tab section .txt-side,
@@ -376,7 +382,8 @@ a:visited {
 }
 
 #content.tab section .img-side {
-  min-height: var(--tab-section-empty-space);
+  min-height: 100%;
+  max-height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -384,6 +391,7 @@ a:visited {
 
 #content.tab section.with-side-image.img-side-fixed .img-side {
   background-attachment: fixed;
+  min-height: var(--tab-section-empty-space);
 }
 
 #content.tab section.with-side-image.img-alternate .section-container {
@@ -399,7 +407,7 @@ a:visited {
 
 @media only screen and (min-width: 768px), (orientation: landscape) {
   #content.tab section.with-side-image.img-alternate .section-container {
-    grid-template-rows: min-content;
+    grid-template-rows: max-content;
   }
 
   #content.tab
