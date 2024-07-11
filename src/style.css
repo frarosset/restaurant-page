@@ -162,6 +162,10 @@ body > * {
   flex-direction: column;
 }
 
+.screen-height:has(.tab) {
+  background-image: url("./img/home-bg-tab.jpg");
+}
+
 h1,
 h2,
 h3,
