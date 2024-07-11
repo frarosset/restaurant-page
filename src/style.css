@@ -63,7 +63,7 @@
   --tab-h4-fontsize: 2rem;
   --tab-p-fontsize: 1rem;
   --tab-price-fontsize: 1.2rem;
-  --button-font-size: 2rem;
+  --button-font-size: 1.5rem;
   --book-now-font-size: var(--txt-fnt-size);
 
   --logo-size: calc(2 * var(--title-font-size));
@@ -91,7 +91,7 @@
   --book-now-max-width: 40em;
   --book-now-input-div-gap: 1.5em 2em;
   --book-now-input-padding: 0.5em 1em;
-  --button-padding: 0.4em 1.2em;
+  --button-padding: 0.2em 1.2em;
 
   /* Radius */
   --radius: 4rem;
@@ -240,7 +240,7 @@ button.styled:active {
   align-items: center;
 }
 
-.screen-height > header .logo-and-name h1 {
+.screen-height > header .logo-and-name .name {
   font-family: var(--title-font);
   font-size: var(--title-font-size);
 }
