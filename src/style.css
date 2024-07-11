@@ -15,6 +15,7 @@
 :root {
   /* Colors (palette)*/
   --col-accent: #f5cb5c;
+  --col-accent-shade: #feb80a;
   --col-pure-white: #ffffff;
   --col-white: #e8eddf;
   --col-light-grey: #cfdbd5;
@@ -22,10 +23,16 @@
   --col-black: #242423;
   --col-pure-black: #000000;
 
+  --accent-gradient: linear-gradient(
+    var(--col-accent),
+    var(--col-accent-shade)
+  );
+
   /* Colors (background)*/
   --bg-col: var(--col-white);
   --bg-col-txt: var(--col-accent);
   --bg-col-txt-alt: var(--col-dark-grey);
+  --bg-col-button: var(--col-accent);
 
   /* Colors (text/icons)*/
   --col-txt: var(--col-black);
@@ -41,7 +48,8 @@
   /* Font family */
   --main-font: "JosefinSans", sans-serif;
   --main-font-alt: "Satisfy", serif;
-  --title-font: "Satisfy", serif;
+  --title-font: var(--main-font-alt);
+  --button-font: var(--main-font-alt);
 
   /* Font sizes */
   --txt-fontsize: max(18px, 0.6vw);
@@ -55,6 +63,8 @@
   --tab-h4-fontsize: 2rem;
   --tab-p-fontsize: 1rem;
   --tab-price-fontsize: 1.2rem;
+  --button-font-size: 2rem;
+  --book-now-font-size: var(--txt-fnt-size);
 
   --logo-size: calc(2 * var(--title-font-size));
 
@@ -78,11 +88,17 @@
   --nav-btn-padding: 0.5em 0.5em;
   --nav-btn-sel-scale: 1.2;
   --contact-hours-horizontal-gap: 3rem;
+  --book-now-max-width: 40em;
+  --book-now-input-div-gap: 1.5em 2em;
+  --book-now-input-padding: 0.5em 1em;
+  --button-padding: 0.25em 0.5em;
 
   /* Radius */
   --radius: 4rem;
   --sel-radius: 50% 50% 78% 22% / 30% 49% 51% 70%;
   --map-radius: 1rem;
+  --book-now-input-radius: 1rem;
+  --button-radius: calc(var(--book-now-max-width) / 2);
 
   /* Shadows */
   --text-shadow: 3px 3px 3px var(--col-black);
@@ -172,6 +188,31 @@ a:visited {
   text-decoration: none;
 }
 
+/* Button style might be overwritten */
+button.styled {
+  background-color: var(--bg-col-button);
+  border: max(0.15em, 2px) solid var(--col-txt);
+  font-family: var(--button-font);
+  font-size: var(--button-font-size);
+  font-weight: 800;
+  border-radius: var(--button-radius);
+  padding: var(--button-padding);
+  box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow), 0px 5px 10px 3px var(--col-pure-white);
+  width: max-content;
+  background: var(--accent-gradient);
+}
+
+button.styled:active {
+  filter: brightness(0.7);
+}
+
+@media not all and (hover: none) {
+  button.styled:hover {
+    filter: brightness(0.7);
+  }
+}
+
 /* HEADER */
 
 .screen-height > header {
@@ -259,7 +300,12 @@ a:visited {
   flex: 1;
 }
 
+#content:not(.tab) {
+  justify-content: space-evenly;
+}
+
 /* HOME PAGE */
+
 .home-txt {
   color: var(--col-p-home);
   font-size: var(--home-txt-fontsize);
@@ -277,12 +323,6 @@ a:visited {
 }
 .highlight {
   font-family: var(--main-font-alt);
-}
-
-@media only screen and (min-width: 768px), (orientation: landscape) {
-  .home-txt {
-    text-align: left;
-  }
 }
 
 /* TAB PAGES */
@@ -402,7 +442,7 @@ a:visited {
   background-attachment: fixed;
 }
 
-#content.tab section.with-side-image.img-fixed .img-side {
+#content.tab section.with-side-image .img-side {
   min-height: var(--tab-section-empty-space);
 }
 
@@ -440,6 +480,10 @@ a:visited {
     .section-container {
     grid-template-areas: "img txt";
     grid-template-columns: var(--img-side-width) var(--txt-side-width);
+  }
+
+  #content.tab section.with-side-image:not(.img-fixed) .img-side {
+    min-height: auto;
   }
 }
 
@@ -541,3 +585,98 @@ svg.svg-inline--fa {
 }
 
 /* BOOK NOW PAGES */
+#content.tab.book-now section .section-container {
+  backdrop-filter: blur(2px) brightness(70%);
+  max-width: 100%;
+}
+
+#content.tab.book-now button {
+  grid-area: button;
+  justify-self: center;
+}
+
+#content.tab.book-now form {
+  display: grid;
+  grid-template-areas:
+    "name"
+    "guests"
+    "date"
+    "hour"
+    "email"
+    "phone"
+    "note"
+    "."
+    "button";
+  grid-template-columns: 1fr;
+  grid-template-columns: auto;
+  gap: var(--book-now-input-div-gap);
+  max-width: var(--book-now-max-width);
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px), (orientation: landscape) {
+  #content.tab.book-now form {
+    grid-template-areas:
+      "name name name name"
+      "date date hour guests"
+      "phone phone email email"
+      "note note note note"
+      ". . . ."
+      ". button button .";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+#content.tab.book-now form .name-input-div {
+  grid-area: name;
+}
+#content.tab.book-now form .guests-input-div {
+  grid-area: guests;
+}
+#content.tab.book-now form .date-input-div {
+  grid-area: date;
+}
+#content.tab.book-now form .hour-input-div {
+  grid-area: hour;
+}
+#content.tab.book-now form .phone-input-div {
+  grid-area: phone;
+}
+#content.tab.book-now form .email-input-div {
+  grid-area: email;
+}
+#content.tab.book-now form .note-input-div {
+  grid-area: note;
+}
+
+#content.tab.book-now form > div {
+  display: flex;
+  flex-direction: column;
+}
+
+#content.tab.book-now form input,
+#content.tab.book-now form textarea {
+  border-radius: var(--book-now-input-radius);
+  border: none;
+  outline: none;
+}
+
+#content.tab.book-now form label,
+#content.tab.book-now form input,
+#content.tab.book-now form textarea {
+  padding: var(--book-now-input-padding);
+  font-size: var(--book-now-font-size);
+}
+
+#content.tab.book-now form label {
+  padding-top: 0;
+  color: var(--col-txt-alt);
+}
+
+#content.tab.book-now form label:has(+ input:optional)::after,
+#content.tab.book-now form label:has(+ textarea:optional)::after {
+  content: " (optional)";
+  font-style: italic;
+  color: var(--col-light-grey);
+}

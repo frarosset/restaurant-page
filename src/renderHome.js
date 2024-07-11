@@ -32,7 +32,8 @@ function createHome(contentDiv) {
 
 function initBookNowButton(contentDiv) {
   const bookNowButton = document.createElement("button");
-  bookNowButton.textContent = "Book now!";
+  bookNowButton.textContent = "Book now !";
+  bookNowButton.classList.add("styled");
   bookNowButton.type = "button";
   bookNowButton.contentDiv = contentDiv;
   bookNowButton.addEventListener("click", (e) =>

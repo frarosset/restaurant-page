@@ -12,7 +12,8 @@ export default function initBookForm() {
   }
 
   const submitButton = document.createElement("button");
-  submitButton.textContent = "BOOK";
+  submitButton.textContent = "Book !";
+  submitButton.classList.add("styled");
   form.appendChild(submitButton);
   return form;
 }
