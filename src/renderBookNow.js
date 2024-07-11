@@ -17,10 +17,14 @@ function createHome(contentDiv) {
 }
 
 function createBookNowSection() {
-  const [section, txtSide] = initGenericSection("", bookNowImg, {
-    withBgImage: true,
-    withFixedImage: true,
-  });
+  const [section, txtSide] = initGenericSection(
+    "Make a reservation",
+    bookNowImg,
+    {
+      withBgImage: true,
+      withFixedImage: true,
+    }
+  );
 
   txtSide.appendChild(initBookForm());
 
