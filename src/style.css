@@ -37,7 +37,7 @@
   /* Colors (text/icons)*/
   --col-txt: var(--col-black);
   --col-txt-alt: var(--col-white);
-  --col-p-home: var(--col-pure-white);
+  --col-p-home: var(--col-black);
   --col-h2-tab: var(--col-black);
   --col-h3: var(--col-black);
   --col-h3-alt: var(--col-white);
@@ -71,7 +71,8 @@
   --max-width: min(1440px, 100%);
 
   /*Margins, gaps and paddings (+widths)*/
-  --home-padding: calc(0.5 * var(--home-txt-fontsize))
+  --not-tab-gap: 5vh;
+  --home-padding: calc(max(0.5 * var(--home-txt-fontsize), 5vh))
     calc(1 * var(--home-txt-fontsize));
   --header-padding: 1rem;
   --header-gap: 1rem;
@@ -81,7 +82,7 @@
   --tab-div-inside-section-gap: 1rem 2rem;
   --tab-div-inside-section-with-subsections-gap: 2rem 2rem;
   --tab-div-inside-subsections-gap: 0.5rem 0.5rem;
-  --tab-section-empty-space: 60vh;
+  --tab-section-empty-space: 55vh;
   --tab-price-padding: 0.3em 0.5em;
   --nav-gap: 1.5em;
   --nav-btn-sel-scale: 1.2;
@@ -89,7 +90,7 @@
   --book-now-max-width: 40em;
   --book-now-input-div-gap: 1.5em 2em;
   --book-now-input-padding: 0.5em 1em;
-  --button-padding: 0.25em 0.5em;
+  --button-padding: 0.6em 1.2em;
 
   /* Radius */
   --radius: 4rem;
@@ -99,8 +100,11 @@
   --button-radius: calc(var(--book-now-max-width) / 2);
 
   /* Shadows */
-  --text-shadow: 3px 3px 3px var(--col-black);
-  --box-shadow: 0px 0px 8px var(--col-black);
+  --col-p-home: var(--col-dark-grey);
+  --text-shadow: 3px 3px 3px var(--col-light-grey);
+  --box-shadow: 0px 0px 25px 6px var(--col-dark-grey);
+  --box-shadow-inset-top: 0px 15px 15px -15px var(--col-dark-grey) inset;
+  --box-shadow-double: 0px 0px 4px 2px var(--col-pure-black), var(--box-shadow);
 
   /* Animations on hover / active / ...*/
   /* --transition-time: 0.8s; */
@@ -306,6 +310,7 @@ button.styled:active {
 
 #content:not(.tab) {
   justify-content: space-evenly;
+  gap: var(--not-tab-gap);
 }
 
 /* HOME PAGE */
@@ -313,11 +318,16 @@ button.styled:active {
 .home-txt {
   color: var(--col-p-home);
   font-size: var(--home-txt-fontsize);
-  backdrop-filter: blur(2px) brightness(70%);
   text-shadow: var(--text-shadow);
   padding: var(--home-padding);
   width: 100%;
   text-align: center;
+  background-image: url("./img/home-bg-tab.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  box-shadow: var(--box-shadow);
 }
 
 .home-txt h2 {
@@ -384,7 +394,11 @@ button.styled:active {
 
 #content.tab section.with-bg-image,
 #content.tab section:not(.with-bg-image) .section-container {
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow-double);
+}
+
+#content.tab section:not(.with-bg-image).img-fixed .img-side {
+  box-shadow: var(--box-shadow-inset-top);
 }
 
 #content.tab section:not(.with-bg-image) .section-container,
