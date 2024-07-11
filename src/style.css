@@ -24,13 +24,13 @@
   --col-pure-black: #000000;
 
   --accent-gradient: linear-gradient(
-    var(--col-accent),
+    var(--col-accent) 30%,
     var(--col-accent-shade)
   );
 
   /* Colors (background)*/
   --bg-col: var(--col-white);
-  --bg-col-txt: var(--col-accent);
+  --bg-col-txt: var(--accent-gradient);
   --bg-col-txt-alt: var(--col-dark-grey);
   --bg-col-button: var(--col-accent);
 
@@ -383,8 +383,9 @@ button.styled:active {
   box-shadow: var(--box-shadow);
 }
 
-#content.tab section:not(.with-bg-image) .section-container {
-  background-color: var(--section-bg-col-txt);
+#content.tab section:not(.with-bg-image) .section-container,
+#content.tab section:not(.with-bg-image) .txt-side {
+  background: var(--section-bg-col-txt);
 }
 
 #content.tab section .txt-side,
@@ -516,7 +517,7 @@ button.styled:active {
   border-radius: var(--sel-radius);
   padding: var(--tab-price-padding);
   font-size: var(--tab-price-fontsize);
-  background-color: var(--section-bg-col-alt);
+  background: var(--section-bg-col-alt);
   color: var(--section-col-txt-alt);
   grid-area: price;
 }
@@ -532,7 +533,11 @@ button.styled:active {
 }
 
 #content.tab.contact section.with-side-image.img-alternate .txt-side {
+  width: 100%;
+}
+#content.tab.contact section.with-side-image.img-alternate .txt-side > * {
   max-width: max-content;
+  margin: 0 auto;
 }
 
 #content.tab.contact div.days-and-hours {
