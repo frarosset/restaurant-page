@@ -104,9 +104,10 @@
   /* Shadows */
   --col-p-home: var(--col-dark-grey);
   --text-shadow: 3px 3px 3px var(--col-light-grey);
-  --box-shadow: 0px 0px 25px 6px var(--col-dark-grey);
+  --box-shadow-large: 0px 0px 20px 3px var(--col-dark-grey);
+  --box-shadow-small: 0px 0px 4px 2px var(--col-pure-black);
   --box-shadow-inset-top: 0px 15px 15px -15px var(--col-dark-grey) inset;
-  --box-shadow-double: 0px 0px 4px 2px var(--col-pure-black), var(--box-shadow);
+  --box-shadow-double: var(--box-shadow-small), var(--box-shadow-large);
 
   /* Animations on hover / active / ...*/
   /* --transition-time: 0.8s; */
@@ -205,7 +206,7 @@ button.styled {
   font-weight: 800;
   border-radius: var(--button-radius);
   padding: var(--button-padding);
-  box-shadow: var(--box-shadow-double);
+  box-shadow: var(--box-shadow-small);
   width: max-content;
   background: var(--accent-gradient);
 }
@@ -329,7 +330,7 @@ button.styled:active {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow-large);
 }
 
 #content.home .home-txt h2 {
