@@ -55,8 +55,8 @@
   --txt-fontsize: max(18px, 0.6vw);
   --txt-lineheight: 1.2;
   --title-font-size: 2.5rem;
-  --home-h2-fontsize: 4vw;
-  --home-txt-fontsize: 6vw;
+  --home-h2-fontsize: min(4vw, 2rem);
+  --home-txt-fontsize: min(6vw, 3rem);
   --tab-h2-fontsize: 2.5rem;
   --tab-h3-fontsize: 2rem;
   --tab-h3-menu-fontsize: 2.8rem;
@@ -64,7 +64,7 @@
   --tab-p-fontsize: 1rem;
   --tab-price-fontsize: 1.2rem;
   --button-font-size: 1.5rem;
-  --book-now-font-size: var(--txt-fnt-size);
+  --book-now-font-size: 1rem;
 
   --logo-size: calc(2 * var(--title-font-size));
 
@@ -72,9 +72,8 @@
   --max-width: min(1440px, 100%);
 
   /*Margins, gaps and paddings (+widths)*/
-  --not-tab-gap: 5vh;
-  --home-padding: calc(max(0.5 * var(--home-txt-fontsize), 5vh))
-    calc(1 * var(--home-txt-fontsize));
+  --home-button-tb-margin: 10vh;
+  --home-padding: calc(max(0.5em, 5vh)) 1em;
   --header-padding: 1rem;
   --header-gap: 1rem;
   --tab-header-padding: 1rem 1rem 2rem;
@@ -258,7 +257,7 @@ button.styled:active {
   font-weight: 800;
 }
 
-.screen-height:has(.home-txt) > header .logo-and-name {
+.screen-height:has(.home) > header .logo-and-name {
   pointer-events: none;
 }
 .screen-height:has(.tab.about) > header nav button.about-btn,
@@ -309,14 +308,12 @@ button.styled:active {
   flex: 1;
 }
 
-#content:not(.tab) {
+/* HOME PAGE */
+#content.home {
   justify-content: space-evenly;
-  gap: var(--not-tab-gap);
 }
 
-/* HOME PAGE */
-
-.home-txt {
+#content.home .home-txt {
   color: var(--col-p-home);
   font-size: var(--home-txt-fontsize);
   text-shadow: var(--text-shadow);
@@ -331,7 +328,7 @@ button.styled:active {
   box-shadow: var(--box-shadow);
 }
 
-.home-txt h2 {
+#content.home .home-txt h2 {
   font-size: var(--home-h2-fontsize);
   text-transform: uppercase;
   text-shadow: none;
@@ -340,8 +337,13 @@ button.styled:active {
   background-clip: text;
   color: transparent;
 }
-.highlight {
+
+#content.home .highlight {
   font-family: var(--main-font-alt);
+}
+
+#content.home button {
+  margin: var(--home-button-tb-margin) auto;
 }
 
 /* TAB PAGES */

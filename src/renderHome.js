@@ -26,6 +26,7 @@ function createHome(contentDiv) {
 
   contentDiv.appendChild(homeTxtDiv);
   contentDiv.classList.toggle("tab", false);
+  contentDiv.classList.toggle("home", true);
 
   contentDiv.appendChild(initBookNowButton(contentDiv));
 }
