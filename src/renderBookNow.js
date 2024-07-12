@@ -1,4 +1,4 @@
-import { removeDescendants } from "./domUtils.js";
+import { resetTab } from "./domUtils.js";
 import initBookForm from "./initBookForm.js";
 import initGenericTab from "./initGenericTab.js";
 import initGenericSection from "./initGenericSection.js";
@@ -6,8 +6,7 @@ import initGenericSection from "./initGenericSection.js";
 import bookNowImg from "./img/book-now.jpg";
 
 export default function renderBookNow(contentDiv) {
-  removeDescendants(contentDiv);
-  contentDiv.setAttribute("class", "");
+  resetTab(contentDiv);
   createHome(contentDiv);
 }
 

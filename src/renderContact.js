@@ -1,4 +1,4 @@
-import { removeDescendants } from "./domUtils.js";
+import { resetTab } from "./domUtils.js";
 import initGenericTab from "./initGenericTab.js";
 import initGenericSection from "./initGenericSection.js";
 import {
@@ -6,20 +6,20 @@ import {
   initLocationMapDiv,
   initOpeningHoursDiv,
 } from "./initInfoDivFromData.js";
+import initBookNowButton from "./initBookNowButton.js";
 
 import contactImg_0 from "./img/contact-0.jpg";
 import contactImg_1 from "./img/contact-1.jpg";
 
 export default function renderContact(contentDiv) {
-  removeDescendants(contentDiv);
-  contentDiv.setAttribute("class", "");
+  resetTab(contentDiv);
   createContact(contentDiv);
 }
 
 function createContact(contentDiv) {
   initGenericTab(contentDiv, "contact");
   contentDiv.appendChild(createContactInfoSection());
-  contentDiv.appendChild(createOpeningHoursSection());
+  contentDiv.appendChild(createOpeningHoursSection(contentDiv));
 }
 
 function createContactInfoSection() {
@@ -38,7 +38,7 @@ function createContactInfoSection() {
   return section;
 }
 
-function createOpeningHoursSection() {
+function createOpeningHoursSection(contentDiv) {
   const [section, txtSide] = initGenericSection("Opening hours", contactImg_1, {
     withSideImage: true,
     imgAlternate: true,
@@ -47,6 +47,8 @@ function createOpeningHoursSection() {
 
   // Add contact info div
   txtSide.appendChild(initOpeningHoursDiv());
+
+  txtSide.appendChild(initBookNowButton(contentDiv, "Book"));
 
   return section;
 }

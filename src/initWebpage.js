@@ -1,4 +1,5 @@
 import initHeader from "./initHeader.js";
+import initFooter from "./initFooter.js";
 import renderHome from "./renderHome.js";
 import setCreditFooter from "./creditFooter.js";
 
@@ -20,6 +21,9 @@ export default function initWebpage() {
 
   // Add everything to the body
   document.body.appendChild(screenHeightDiv);
+
+  // Append the footer
+  document.body.appendChild(initFooter(contentDiv));
 
   // Add credit footer at the bottom
   setCreditFooter();

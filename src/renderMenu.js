@@ -1,4 +1,4 @@
-import { removeDescendants } from "./domUtils.js";
+import { resetTab } from "./domUtils.js";
 import initGenericTab from "./initGenericTab.js";
 import initGenericSection from "./initGenericSection.js";
 
@@ -16,8 +16,7 @@ import menuImg_4 from "./img/menu-4.jpg";
 const menuImg = [menuImg_0, menuImg_1, menuImg_2, menuImg_3, menuImg_4];
 
 export default function renderMenu(contentDiv) {
-  removeDescendants(contentDiv);
-  contentDiv.setAttribute("class", "");
+  resetTab(contentDiv);
   createMenu(contentDiv);
 }
 

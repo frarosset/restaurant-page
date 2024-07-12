@@ -1,9 +1,8 @@
-import { removeDescendants } from "./domUtils.js";
-import renderBookNow from "./renderBookNow.js";
+import { resetTab } from "./domUtils.js";
+import initBookNowButton from "./initBookNowButton.js";
 
 export default function renderHome(contentDiv) {
-  removeDescendants(contentDiv);
-  contentDiv.setAttribute("class", "");
+  resetTab(contentDiv);
   createHome(contentDiv);
 }
 
@@ -28,20 +27,7 @@ function createHome(contentDiv) {
   contentDiv.classList.toggle("tab", false);
   contentDiv.classList.toggle("home", true);
 
-  contentDiv.appendChild(initBookNowButton(contentDiv));
-}
-
-function initBookNowButton(contentDiv) {
-  const bookNowButton = document.createElement("button");
-  bookNowButton.textContent = "Book now !";
-  bookNowButton.classList.add("styled");
-  bookNowButton.type = "button";
-  bookNowButton.contentDiv = contentDiv;
-  bookNowButton.addEventListener("click", (e) =>
-    renderBookNow(e.currentTarget.contentDiv)
-  );
-
-  return bookNowButton;
+  contentDiv.appendChild(initBookNowButton(contentDiv, "Book now !"));
 }
 
 // placeholder content generated with assistance from Microsoft Copilot

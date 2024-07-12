@@ -1,4 +1,4 @@
-import { removeDescendants } from "./domUtils.js";
+import { resetTab } from "./domUtils.js";
 import initGenericTab from "./initGenericTab.js";
 import initGenericSection from "./initGenericSection.js";
 
@@ -13,8 +13,7 @@ import aboutImg_3 from "./img/about-3.jpg";
 const aboutImg = [aboutImg_0, aboutImg_1, aboutImg_2, aboutImg_3];
 
 export default function renderAbout(contentDiv) {
-  removeDescendants(contentDiv);
-  contentDiv.setAttribute("class", "");
+  resetTab(contentDiv);
   createAbout(contentDiv);
 }
 
