@@ -6,6 +6,7 @@ import {
 
 export default function initFooter(contentDiv) {
   const footer = document.createElement("footer");
+  footer.classList.add("main-footer");
 
   // Append the logo and the title
   footer.appendChild(initLogoAndTitle(contentDiv));
@@ -14,7 +15,7 @@ export default function initFooter(contentDiv) {
   footer.appendChild(initContactInfoDiv());
 
   // Add opening hours info div
-  footer.appendChild(initOpeningHoursDiv());
+  footer.appendChild(initOpeningHoursDiv(true));
 
   return footer;
 }

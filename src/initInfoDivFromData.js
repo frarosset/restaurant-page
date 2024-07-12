@@ -1,6 +1,7 @@
 // in the following csv file, each line refers to a section in the contact tab
 import contactInfo from "./data/contact-info.json";
 import contactOpeningHoursInfo from "./data/contact-opening-hours.csv";
+import contactOpeningHoursInfoShort from "./data/contact-opening-hours-short.csv";
 import contactIcons from "./data/contact-icons.json";
 import { setFaIconAndLabel } from "./fontAwesomeUtilities.js";
 
@@ -34,11 +35,15 @@ export function initLocationMapDiv() {
   return mapsDiv;
 }
 
-export function initOpeningHoursDiv() {
+export function initOpeningHoursDiv(shortNotation = false) {
   const openingHoursDiv = document.createElement("div");
   openingHoursDiv.classList.add("days-and-hours");
 
-  contactOpeningHoursInfo.forEach((openingHoursInfo) => {
+  const contactOpeningHoursInfoToUse = shortNotation
+    ? contactOpeningHoursInfoShort
+    : contactOpeningHoursInfo;
+
+  contactOpeningHoursInfoToUse.forEach((openingHoursInfo) => {
     const pDays = document.createElement("p");
     pDays.classList.add("days");
     pDays.textContent = openingHoursInfo[0];
