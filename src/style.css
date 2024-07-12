@@ -734,6 +734,13 @@ footer.main-footer {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: var(--footer-padding);
+  gap: var(--footer-padding);
+}
+
+footer.main-footer .footer-content {
   display: grid;
   grid-template-areas:
     "logo"
@@ -742,7 +749,6 @@ footer.main-footer {
   grid-template-columns: min-content;
   justify-content: center;
   justify-items: center;
-  padding: var(--footer-padding);
   gap: var(--footer-gap);
 }
 
@@ -788,8 +794,26 @@ footer.main-footer .days-and-hours .hour:not(:last-child):after {
   content: ",\00a0";
 }
 
+footer.main-footer .img-credit {
+  grid-area: "img-credit";
+  text-align: justify;
+  text-justify: inter-word;
+  text-wrap: pretty;
+}
+
+footer.main-footer .img-credit a {
+  font-weight: bold;
+}
+
+@media not all and (hover: none) {
+  footer.main-footer .img-credit a:hover {
+    text-shadow: 2px 2px 2px var(--col-accent);
+    cursor: pointer;
+  }
+}
+
 @media only screen and (min-width: 768px), (orientation: landscape) {
-  footer.main-footer {
+  footer.main-footer .footer-content {
     grid-template-areas:
       "logo info"
       "hours hours";
@@ -808,7 +832,7 @@ footer.main-footer .days-and-hours .hour:not(:last-child):after {
 }
 
 @media only screen and (min-width: 1024px) {
-  footer.main-footer {
+  footer.main-footer .footer-content {
     grid-template-areas: "logo info hours";
     grid-template-columns: max-content max-content max-content;
   }
