@@ -1,5 +1,6 @@
 import initHeader from "./initHeader.js";
 import renderHome from "./renderHome.js";
+import setCreditFooter from "./creditFooter.js";
 
 export default function initWebpage() {
   // Init the content div first (you need a reference to it to create links in the header)
@@ -18,5 +19,8 @@ export default function initWebpage() {
   renderHome(contentDiv);
 
   // Add everything to the body
-  document.querySelector("body").appendChild(screenHeightDiv);
+  document.body.appendChild(screenHeightDiv);
+
+  // Add credit footer at the bottom
+  setCreditFooter();
 }

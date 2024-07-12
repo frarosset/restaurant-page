@@ -24,5 +24,8 @@
     "webpack-dev-server": "^5.0.4",
     "webpack-merge": "^5.10.0",
     "xml-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "webfontloader": "^1.6.28"
   }
 }
