@@ -76,6 +76,8 @@
   --home-padding: calc(max(0.5em, 5vh)) 1em;
   --header-padding: 1rem;
   --header-gap: 1rem;
+  --footer-padding: 3rem 2rem;
+  --footer-gap: 2rem;
   --tab-header-padding: 1rem 1rem 2rem;
   --tab-section-padding: 3.5rem 2rem;
   --tab-section-gap: 2rem;
@@ -218,6 +220,21 @@ button.styled:active {
   }
 }
 
+/* LOGO */
+.logo-and-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-and-name .name {
+  font-family: var(--title-font);
+  font-size: var(--title-font-size);
+}
+.logo-and-name img {
+  width: var(--logo-size);
+}
+
 /* HEADER */
 
 .screen-height > header {
@@ -233,19 +250,6 @@ button.styled:active {
   gap: var(--header-gap);
 }
 
-.screen-height > header .logo-and-name {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.screen-height > header .logo-and-name .name {
-  font-family: var(--title-font);
-  font-size: var(--title-font-size);
-}
-.screen-height > header .logo-and-name img {
-  width: var(--logo-size);
-}
 .screen-height > header nav {
   display: flex;
   gap: var(--nav-gap);
@@ -277,7 +281,7 @@ button.styled:active {
     flex-direction: row;
   }
 
-  .screen-height > header .logo-and-name {
+  .logo-and-name {
     flex-direction: row;
   }
 }
@@ -719,4 +723,105 @@ svg.svg-inline--fa {
   content: " (optional)";
   font-style: italic;
   color: var(--col-light-grey);
+}
+
+/* FOOTER */
+:root {
+  --footer-days-and-hours-padding: 1rem;
+}
+
+footer.main-footer {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-areas:
+    "logo"
+    "info"
+    "hours";
+  grid-template-columns: min-content;
+  justify-content: center;
+  justify-items: center;
+  padding: var(--footer-padding);
+  gap: var(--footer-gap);
+}
+
+footer.main-footer .logo-and-name {
+  grid-area: logo;
+  flex-direction: column;
+}
+footer.main-footer .contact-info {
+  grid-area: info;
+  align-self: center;
+}
+footer.main-footer .contact-info p {
+  text-wrap: balance;
+}
+
+/* Purposely exclude .address from here to better centering .contact-info */
+footer.main-footer .contact-info .phone,
+footer.main-footer .contact-info .email {
+  width: max-content;
+}
+
+footer.main-footer .days-and-hours {
+  grid-area: hours;
+  display: grid;
+  grid-template-columns: max-content;
+  border-top: 1px solid var(--col-txt);
+  justify-content: center;
+  justify-items: center;
+  padding: var(--footer-days-and-hours-padding);
+  padding-bottom: 0;
+}
+footer.main-footer .days-and-hours .days {
+  font-weight: bold;
+}
+footer.main-footer .days-and-hours .days:not(:first-child) {
+  margin-top: var(--footer-days-and-hours-padding);
+}
+footer.main-footer .days-and-hours .hours {
+  display: flex;
+}
+
+footer.main-footer .days-and-hours .hour:not(:last-child):after {
+  content: ",\00a0";
+}
+
+@media only screen and (min-width: 768px), (orientation: landscape) {
+  footer.main-footer {
+    grid-template-areas:
+      "logo info"
+      "hours hours";
+    grid-template-columns: max-content max-content;
+  }
+
+  footer.main-footer .days-and-hours {
+    grid-template-columns: max-content max-content;
+    justify-items: start;
+    gap: 0 var(--footer-days-and-hours-padding);
+  }
+
+  footer.main-footer .days-and-hours .days:not(:first-child) {
+    margin-top: 0;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  footer.main-footer {
+    grid-template-areas: "logo info hours";
+    grid-template-columns: max-content max-content max-content;
+  }
+
+  footer.main-footer .days-and-hours {
+    align-self: center;
+    border: none;
+    border-left: 1px solid var(--col-txt);
+    padding: var(--footer-days-and-hours-padding);
+    padding-right: 0;
+  }
+
+  footer.main-footer .days-and-hours .days:not(:first-child) {
+    margin-top: 0;
+  }
 }
