@@ -1,5 +1,8 @@
 {
   "address": ["solid", "location-dot"],
   "phone": ["solid", "phone"],
-  "email": ["solid", "envelope"]
+  "email": ["solid", "envelope"],
+  "facebook": ["brands", "facebook"],
+  "instagram": ["brands", "instagram"],
+  "x-twitter": ["brands", "x-twitter"]
 }

@@ -595,7 +595,13 @@ button.styled:active {
   }
 }
 
-.contact-info > * {
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.contact-info > .contact-list > * {
   display: grid;
   grid-template-columns: max-content 1fr;
   text-wrap: balance;
@@ -606,6 +612,21 @@ button.styled:active {
 .contact-info .phone,
 .contact-info .email {
   width: max-content;
+}
+
+.contact-info > .contact-social {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center;
+  gap: 1em !important;
+  color: var(--col-txt);
+}
+
+@media not all and (hover: none) {
+  .contact-info > .contact-social a:hover {
+    color: var(--col-accent);
+    cursor: pointer;
+  }
 }
 
 svg.svg-inline--fa {

@@ -3,14 +3,18 @@ import contactInfo from "./data/contact-info.json";
 import contactOpeningHoursInfo from "./data/contact-opening-hours.csv";
 import contactOpeningHoursInfoShort from "./data/contact-opening-hours-short.csv";
 import contactIcons from "./data/contact-icons.json";
-import { setFaIconAndLabel } from "./fontAwesomeUtilities.js";
+import { setFaIconAndLabel, setFaIcon } from "./fontAwesomeUtilities.js";
 
 export function initContactInfoDiv() {
   const contactInfoDiv = document.createElement("div");
   contactInfoDiv.classList.add("contact-info");
 
+  const contactInfoListDiv = document.createElement("div");
+  contactInfoListDiv.classList.add("contact-list");
+  contactInfoDiv.appendChild(contactInfoListDiv);
+
   Object.keys(contactInfo).forEach((key) => {
-    if (key === "lon" || key === "lat") return;
+    if (key === "lon" || key === "lat" || key === "social") return;
 
     const fieldP = document.createElement("p");
     fieldP.classList.add(key);
@@ -23,7 +27,23 @@ export function initContactInfoDiv() {
       "span"
     );
 
-    contactInfoDiv.appendChild(fieldP);
+    contactInfoListDiv.appendChild(fieldP);
+  });
+
+  const contactSocialDiv = document.createElement("div");
+  contactSocialDiv.classList.add("contact-social");
+  contactInfoDiv.appendChild(contactSocialDiv);
+
+  Object.keys(contactInfo.social).forEach((key) => {
+    const socialA = document.createElement("a");
+    socialA.href = contactInfo.social[key];
+    socialA.classList.add("contact-social-a");
+    contactSocialDiv.appendChild(socialA);
+    setFaIcon(
+      socialA,
+      { prefix: contactIcons[key][0], icon: contactIcons[key][1] },
+      true
+    );
   });
 
   return contactInfoDiv;
