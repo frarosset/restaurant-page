@@ -25,11 +25,12 @@ export function setFaIconAndLabel(
   parentElement,
   faIcon,
   label = "",
-  fullWidth = true
+  fullWidth = true,
+  txtType = null
 ) {
   if (faIcon) {
     parentElement.appendChild(initFaIcon(faIcon, fullWidth));
-    parentElement.appendChild(document.createTextNode(label));
+    parentElement.appendChild(createTextElement(label, txtType));
   } else {
     parentElement.textContent = label;
   }
@@ -39,10 +40,11 @@ export function setLabelAndFaIcon(
   parentElement,
   faIcon,
   label = "",
-  fullWidth = true
+  fullWidth = true,
+  txtType = null
 ) {
   if (faIcon) {
-    parentElement.appendChild(document.createTextNode(label));
+    parentElement.appendChild(createTextElement(label, txtType));
     parentElement.appendChild(initFaIcon(faIcon, fullWidth));
   } else {
     parentElement.textContent = label;
@@ -54,12 +56,13 @@ export function setFaIconInBetweenText(
   faIcon,
   textPre = "",
   textPost = "",
-  fullWidth = true
+  fullWidth = true,
+  txtType = null
 ) {
   if (faIcon) {
-    parentElement.appendChild(document.createTextNode(textPre));
+    parentElement.appendChild(createTextElement(textPre, txtType));
     parentElement.appendChild(initFaIcon(faIcon, fullWidth));
-    parentElement.appendChild(document.createTextNode(textPost));
+    parentElement.appendChild(createTextElement(textPost, txtType));
   } else {
     parentElement.textContent = `${textPre} ${textPost}`;
   }
@@ -78,5 +81,15 @@ export function changeChildFaIcon(
     if (faIcon.icon) {
       iconSVG.setAttribute("data-icon", faIcon.icon);
     }
+  }
+}
+
+function createTextElement(label, txtType = null) {
+  if (txtType) {
+    const txtElement = document.createElement(txtType);
+    txtElement.textContent = label;
+    return txtElement;
+  } else {
+    return document.createTextNode(label);
   }
 }

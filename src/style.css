@@ -595,8 +595,20 @@ button.styled:active {
   }
 }
 
+.contact-info > * {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  text-wrap: balance;
+  gap: 0.5em;
+}
+
+/* Purposely exclude .address from here to better centering .contact-info */
+.contact-info .phone,
+.contact-info .email {
+  width: max-content;
+}
+
 svg.svg-inline--fa {
-  margin-right: 0.5em;
   vertical-align: top;
   color: var(--section-col-h3);
 }
@@ -763,15 +775,6 @@ footer.main-footer .logo-and-name {
 footer.main-footer .contact-info {
   grid-area: info;
   align-self: center;
-}
-footer.main-footer .contact-info p {
-  text-wrap: balance;
-}
-
-/* Purposely exclude .address from here to better centering .contact-info */
-footer.main-footer .contact-info .phone,
-footer.main-footer .contact-info .email {
-  width: max-content;
 }
 
 footer.main-footer .days-and-hours {

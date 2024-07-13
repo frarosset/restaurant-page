@@ -18,7 +18,9 @@ export function initContactInfoDiv() {
     setFaIconAndLabel(
       fieldP,
       { prefix: contactIcons[key][0], icon: contactIcons[key][1] },
-      contactInfo[key]
+      contactInfo[key],
+      true,
+      "span"
     );
 
     contactInfoDiv.appendChild(fieldP);
