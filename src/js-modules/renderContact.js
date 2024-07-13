@@ -1,4 +1,4 @@
-import { resetTab } from "./domUtils.js";
+import { resetTab } from "../js-utilities/domUtils.js";
 import initGenericTab from "./initGenericTab.js";
 import initGenericSection from "./initGenericSection.js";
 import {
@@ -8,8 +8,8 @@ import {
 } from "./initInfoDivFromData.js";
 import initBookNowButton from "./initBookNowButton.js";
 
-import contactImg_0 from "./img/contact-0.jpg";
-import contactImg_1 from "./img/contact-1.jpg";
+import contactImg_0 from "../img/contact-0.jpg";
+import contactImg_1 from "../img/contact-1.jpg";
 
 export default function renderContact(contentDiv) {
   resetTab(contentDiv);

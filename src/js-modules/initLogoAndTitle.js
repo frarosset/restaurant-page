@@ -1,4 +1,4 @@
-import logoSvg from "./img/logo-black.svg";
+import logoSvg from "../img/logo-black.svg";
 import renderHome from "./renderHome.js";
 
 export default function initLogoAndTitle(contentDiv, isH1 = false) {

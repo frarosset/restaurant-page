@@ -1,9 +1,12 @@
 // in the following csv file, each line refers to a section in the contact tab
-import contactInfo from "./data/contact-info.json";
-import contactOpeningHoursInfo from "./data/contact-opening-hours.csv";
-import contactOpeningHoursInfoShort from "./data/contact-opening-hours-short.csv";
-import contactIcons from "./data/contact-icons.json";
-import { setFaIconAndLabel, setFaIcon } from "./fontAwesomeUtilities.js";
+import contactInfo from "../data/contact-info.json";
+import contactOpeningHoursInfo from "../data/contact-opening-hours.csv";
+import contactOpeningHoursInfoShort from "../data/contact-opening-hours-short.csv";
+import contactIcons from "../data/contact-icons.json";
+import {
+  setFaIconAndLabel,
+  setFaIcon,
+} from "../js-utilities/fontAwesomeUtilities.js";
 
 export function initContactInfoDiv() {
   const contactInfoDiv = document.createElement("div");

@@ -1,7 +1,7 @@
 // in the following csv file, each line refers to a section in the contact tab
 
-import formData from "./data/book-form-info.json";
-import { setFaIconAndLabel } from "./fontAwesomeUtilities.js";
+import formData from "../data/book-form-info.json";
+import { setFaIconAndLabel } from "../js-utilities/fontAwesomeUtilities.js";
 
 export default function initBookForm() {
   const form = document.createElement("form");

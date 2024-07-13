@@ -1,4 +1,4 @@
-import { resetTab } from "./domUtils.js";
+import { resetTab } from "../js-utilities/domUtils.js";
 import initBookNowButton from "./initBookNowButton.js";
 
 export default function renderHome(contentDiv) {

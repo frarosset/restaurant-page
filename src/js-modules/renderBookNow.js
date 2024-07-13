@@ -1,9 +1,9 @@
-import { resetTab } from "./domUtils.js";
+import { resetTab } from "../js-utilities/domUtils.js";
 import initBookForm from "./initBookForm.js";
 import initGenericTab from "./initGenericTab.js";
 import initGenericSection from "./initGenericSection.js";
 
-import bookNowImg from "./img/book-now.jpg";
+import bookNowImg from "../img/book-now.jpg";
 
 export default function renderBookNow(contentDiv) {
   resetTab(contentDiv);

@@ -1,14 +1,14 @@
-import { resetTab } from "./domUtils.js";
+import { resetTab } from "../js-utilities/domUtils.js";
 import initGenericTab from "./initGenericTab.js";
 import initGenericSection from "./initGenericSection.js";
 
 // in the following csv file, each line refers to a section in the about tab
-import aboutTabSectionsInfo from "./data/about-sections.csv";
+import aboutTabSectionsInfo from "../data/about-sections.csv";
 
-import aboutImg_0 from "./img/about-0.jpg";
-import aboutImg_1 from "./img/about-1.jpg";
-import aboutImg_2 from "./img/about-2.jpg";
-import aboutImg_3 from "./img/about-3.jpg";
+import aboutImg_0 from "../img/about-0.jpg";
+import aboutImg_1 from "../img/about-1.jpg";
+import aboutImg_2 from "../img/about-2.jpg";
+import aboutImg_3 from "../img/about-3.jpg";
 
 const aboutImg = [aboutImg_0, aboutImg_1, aboutImg_2, aboutImg_3];
 

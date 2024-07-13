@@ -1,7 +1,7 @@
 import initHeader from "./initHeader.js";
 import initFooter from "./initFooter.js";
 import renderHome from "./renderHome.js";
-import setCreditFooter from "./creditFooter.js";
+import setCreditFooter from "../js-utilities/creditFooter.js";
 
 export default function initWebpage() {
   // Init the content div first (you need a reference to it to create links in the header)
