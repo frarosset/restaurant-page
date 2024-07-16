@@ -7,7 +7,7 @@ const defaultData = {
 };
 
 export default function setCreditFooter(data) {
-  data = Object.assign(defaultData, data);
+  data = Object.assign({},defaultData, data);
 
   //let footer = document.querySelector("footer");
   //if (!footer) {

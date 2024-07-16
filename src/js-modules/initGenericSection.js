@@ -8,7 +8,7 @@ export default function initGenericSection(title, imgUrl, options = {}) {
     withBgImage: false,
   };
 
-  options = Object.assign(defaultOptions, options);
+  options = Object.assign({},defaultOptions, options);
 
   //Init the section
   const section = document.createElement("section");
